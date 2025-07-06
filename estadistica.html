@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estadística de Estudiantes - Cálculo II - UMSA</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .estadistica-contenedor {
+            margin-top: 90px;
+            margin-bottom: 40px;
+        }
+        .estadistica-section {
+            margin-top: 30px;
+        }
+        /* Estilos para el menú de pestañas */
+        .tab-menu {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #555;
+        }
+        .tab-button {
+            padding: 10px 20px;
+            cursor: pointer;
+            background-color: #333;
+            color: #eee;
+            border: 1px solid #555;
+            border-bottom: none;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            margin: 0 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .tab-button:hover {
+            background-color: #444;
+        }
+        .tab-button.active {
+            background-color: var(--color-resaltado); /* Usa tu color principal */
+            color: #222;
+            border-color: var(--color-resaltado);
+            border-bottom: 2px solid var(--color-resaltado);
+        }
+        .tab-content {
+            display: none; /* Oculta el contenido de las pestañas por defecto */
+            padding: 20px 0;
+            border: 1px solid #555;
+            border-top: none;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            background-color: #222;
+        }
+        .tab-content.active {
+            display: block; /* Muestra el contenido de la pestaña activa */
+        }
+        .chart-container {
+            background-color: #333;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        canvas {
+            max-width: 100%;
+            height: auto !important; /* Asegura que Chart.js gestione la altura */
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <span class="logo-header">Calculadora de Integrales</span>
+        <nav class="nav-header">
+            <a href="index.html" class="nav-link">Inicio</a>
+            <a href="estadistica.html" class="nav-link active">Estadística de Estudiantes</a>
+        </nav>
+    </header>
+    <div class="contenedor estadistica-contenedor">
+        <h1>Análisis de Rendimiento - Cálculo II</h1>
+        
+        <div class="tab-menu">
+            <button class="tab-button active" data-tab="examen1">Primer Examen</button>
+            <button class="tab-button" data-tab="examen2">Segundo Examen</button>
+            <button class="tab-button" data-tab="comparativa">Comparativa</button>
+        </div>
+
+        <div id="examen1" class="tab-content active">
+            <section class="estadistica-section">
+                <h2>Notas del Primer Examen</h2>
+                <div class="chart-container">
+                    <canvas id="graficaNotasExamen1"></canvas>
+                </div>
+
+                <h2>Asistencia Promedio (Primer Examen)</h2>
+                <div class="chart-container">
+                    <canvas id="graficaAsistenciaExamen1"></canvas>
+                </div>
+
+                <h2>Tiempo de Estudio Promedio (Primer Examen)</h2>
+                <div class="chart-container">
+                    <canvas id="graficaTiempoEstudioExamen1"></canvas>
+                </div>
+
+                <h2>Ejercicios Resueltos Promedio (Primer Examen)</h2>
+                <div class="chart-container">
+                    <canvas id="graficaEjerciciosExamen1"></canvas>
+                </div>
+            </section>
+        </div>
+
+        <div id="examen2" class="tab-content">
+            <section class="estadistica-section">
+                <h2>Notas del Segundo Examen</h2>
+                <div class="chart-container">
+                    <canvas id="graficaNotasExamen2"></canvas>
+                </div>
+
+                <h2>¿Uso de Herramienta para Segundo Examen?</h2>
+                <div class="chart-container">
+                    <canvas id="graficaUsoHerramientaExamen2"></canvas>
+                </div>
+
+                <h2>Asistencia Promedio (Segundo Examen)</h2>
+                <div class="chart-container">
+                    <canvas id="graficaAsistenciaExamen2"></canvas>
+                </div>
+
+                <h2>Tiempo de Estudio Promedio (Segundo Examen)</h2>
+                <div class="chart-container">
+                    <canvas id="graficaTiempoEstudioExamen2"></canvas>
+                </div>
+
+                <h2>Ejercicios Resueltos Promedio (Segundo Examen)</h2>
+                <div class="chart-container">
+                    <canvas id="graficaEjerciciosExamen2"></canvas>
+                </div>
+            </section>
+        </div>
+
+        <div id="comparativa" class="tab-content">
+            <section class="estadistica-section">
+                <h2>Comparativa de Notas: Examen 1 vs. Examen 2</h2>
+                <div class="chart-container">
+                    <canvas id="graficaComparativaNotas"></canvas>
+                </div>
+
+                <h2>Comparativa de Uso de Herramienta y Nota del Segundo Examen</h2>
+                <div class="chart-container">
+                    <canvas id="graficaRelacionHerramientaNota"></canvas>
+                </div>
+
+                <h2>Comparativa de Promedios Generales</h2>
+                <div class="chart-container">
+                    <canvas id="graficaPromediosComparativa"></canvas>
+                </div>
+
+                </section>
+        </div>
+
+    </div>
+    <footer class="footer">
+        © 2025 Facultad de Informática - UMSA
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="estadistica.js"></script>
+</body>
+</html>

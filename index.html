@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Integrales UMSA</title>
+    <link rel="stylesheet" href="style.css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://www.geogebra.org/apps/deployggb.js"></script>
+</head>
+<body id="body">
+    <header class="header">
+        <span class="logo-header">Calculadora de Integrales</span>
+        <nav class="nav-header">
+            <a href="index.html" class="nav-link active">Inicio</a>
+            <a href="estadistica.html" class="nav-link">Estadística de Estudiantes</a>
+        </nav>
+    </header>
+
+    <div class="help_modal" id="help_modal">
+        <span>X</span>
+        <div class="modalContent" id="modalContent"></div>
+    </div>
+    <div class="contenedor">
+        <h1>Calculadora de Cálculo Integral</h1>
+        
+        <section class="seccion-entrada">
+            <h2>Función</h2>
+            <label for="inputFuncion">Función (ej: `x**2`, `exp(x)`, `sin(x)/x`):</label>
+            <div class="input_help">
+                <input type="text" id="inputFuncion" value="x**2 + exp(x)">
+                <button class="input_help_button" id="help_button">❔</button>                
+            </div>
+            <p class="previsualizacion-entrada" id="previsualizacionFuncion"></p>
+
+            <h2>Límites (opcional)</h2>
+            <div class="rejilla-limites">
+                <div>
+                    <label for="inputVariable">Variable:</label>
+                    <input type="text" id="inputVariable" value="x">
+                </div>
+                <div>
+                    <label for="inputLimiteInferior">Inferior (número, `inf`, `-inf`):</label>
+                    <input type="text" id="inputLimiteInferior" value="0">
+                </div>
+                <div>
+                    <label for="inputLimiteSuperior">Superior (número, `inf`, `-inf`):</label>
+                    <input type="text" id="inputLimiteSuperior" value="1">
+                </div>
+            </div>
+            
+            <div class="opciones-adicionales">
+                <label for="inputDecimales">Decimales (para valor numérico):</label>
+                <input type="number" id="inputDecimales" value="2" min="0" max="15">
+            </div>
+
+            <button id="botonCalcular">Calcular</button>
+        </section>
+
+        <section class="seccion-resultados">
+            <h2>Resultados</h2>
+            <h3>Función Original:</h3>
+            <p id="funcionOriginalLatex" class="salida-latex"></p>
+
+            <h3>Integral Indefinida:</h3>
+            <p id="integralIndefinidaLatex" class="salida-latex"></p>
+
+            <h3>Integral Definida:</h3>
+            <p id="integralDefinidaLatex" class="salida-latex"></p>
+            <p id="valorIntegralDefinida" class="salida-valor"></p>
+        </section>
+
+        <section class="seccion-geogebra">
+            <h2>Gráfica con GeoGebra</h2>
+            <div id="elementoGgb"></div>
+            <p class="nota-geogebra">
+                <small>GeoGebra usa 'x'. La gráfica de la integral definida solo es posible con límites numéricos.</small>
+            </p>
+        </section>
+    </div>
+
+    <footer class="footer">
+        © 2025 Facultad de Informática - UMSA
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="interactions.js"></script>
+</body>
+</html>
