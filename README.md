@@ -21,7 +21,7 @@ Una aplicación web para el cálculo de integrales definidas e indefinidas, desa
 ### Configuración
 1. Clona el repositorio:
    ```bash
-   git clone <tu-repositorio>
+   git clone https://github.com/LuisFuturo01/calculadoraDeIntegrales.git
    cd calculadoraDeIntegrales
    ```
 
