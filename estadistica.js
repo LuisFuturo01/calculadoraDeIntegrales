@@ -46,11 +46,38 @@ document.addEventListener('DOMContentLoaded', () => {
             nombre: "Estudiante 5",
             examen1: { nota: 50, asistencia: 15, tiempoEstudio: 4, ejerciciosResueltos: 2 },
             examen2: { nota: 70, asistencia: 16, usoHerramienta: false, tiempoEstudio: 6, ejerciciosResueltos: 3 }
-        }
-        // DEBES AGREGAR AQUÍ LOS DATOS PARA TUS 35 ESTUDIANTES O MÁS, CON DATOS PARA AMBOS EXÁMENES
-        // Ejemplo de estructura si solo tienes datos de encuesta para el Examen 2:
-        // Si no tienes datos del Examen 1 para todos los campos, puedes usar null o 0,
-        // pero idealmente deberías tener datos coherentes para la comparativa.
+        },
+        // ADD MORE STUDENTS HERE following the same structure
+        { nombre: "Estudiante 6", examen1: { nota: 65, asistencia: 17, tiempoEstudio: 7, ejerciciosResueltos: 4 }, examen2: { nota: 85, asistencia: 19, usoHerramienta: true, tiempoEstudio: 8, ejerciciosResueltos: 5 } },
+        { nombre: "Estudiante 7", examen1: { nota: 45, asistencia: 13, tiempoEstudio: 2, ejerciciosResueltos: 1 }, examen2: { nota: 50, asistencia: 14, usoHerramienta: false, tiempoEstudio: 3, ejerciciosResueltos: 2 } },
+        { nombre: "Estudiante 8", examen1: { nota: 75, asistencia: 20, tiempoEstudio: 12, ejerciciosResueltos: 5 }, examen2: { nota: 95, asistencia: 20, usoHerramienta: true, tiempoEstudio: 10, ejerciciosResueltos: 5 } },
+        { nombre: "Estudiante 9", examen1: { nota: 30, asistencia: 10, tiempoEstudio: 1, ejerciciosResueltos: 0 }, examen2: { nota: 40, asistencia: 12, usoHerramienta: false, tiempoEstudio: 2, ejerciciosResueltos: 1 } },
+        { nombre: "Estudiante 10", examen1: { nota: 80, asistencia: 19, tiempoEstudio: 9, ejerciciosResueltos: 4 }, examen2: { nota: 88, asistencia: 20, usoHerramienta: true, tiempoEstudio: 8, ejerciciosResueltos: 5 } },
+        { nombre: "Estudiante 11", examen1: { nota: 58, asistencia: 16, tiempoEstudio: 5, ejerciciosResueltos: 3 }, examen2: { nota: 72, asistencia: 17, usoHerramienta: true, tiempoEstudio: 6, ejerciciosResueltos: 4 } },
+        { nombre: "Estudiante 12", examen1: { nota: 62, asistencia: 17, tiempoEstudio: 6, ejerciciosResueltos: 3 }, examen2: { nota: 78, asistencia: 18, usoHerramienta: false, tiempoEstudio: 7, ejerciciosResueltos: 4 } },
+        { nombre: "Estudiante 13", examen1: { nota: 35, asistencia: 11, tiempoEstudio: 2, ejerciciosResueltos: 1 }, examen2: { nota: 55, asistencia: 13, usoHerramienta: true, tiempoEstudio: 4, ejerciciosResueltos: 2 } },
+        { nombre: "Estudiante 14", examen1: { nota: 78, asistencia: 20, tiempoEstudio: 11, ejerciciosResueltos: 5 }, examen2: { nota: 92, asistencia: 20, usoHerramienta: true, tiempoEstudio: 10, ejerciciosResueltos: 5 } },
+        { nombre: "Estudiante 15", examen1: { nota: 48, asistencia: 14, tiempoEstudio: 3, ejerciciosResueltos: 2 }, examen2: { nota: 68, asistencia: 15, usoHerramienta: false, tiempoEstudio: 5, ejerciciosResueltos: 3 } },
+        { nombre: "Estudiante 16", examen1: { nota: 68, asistencia: 18, tiempoEstudio: 7, ejerciciosResueltos: 4 }, examen2: { nota: 82, asistencia: 19, usoHerramienta: true, tiempoEstudio: 7, ejerciciosResueltos: 4 } },
+        { nombre: "Estudiante 17", examen1: { nota: 52, asistencia: 15, tiempoEstudio: 4, ejerciciosResueltos: 2 }, examen2: { nota: 60, asistencia: 16, usoHerramienta: false, tiempoEstudio: 5, ejerciciosResueltos: 3 } },
+        { nombre: "Estudiante 18", examen1: { nota: 73, asistencia: 19, tiempoEstudio: 9, ejerciciosResueltos: 4 }, examen2: { nota: 89, asistencia: 20, usoHerramienta: true, tiempoEstudio: 9, ejerciciosResueltos: 5 } },
+        { nombre: "Estudiante 19", examen1: { nota: 38, asistencia: 12, tiempoEstudio: 1, ejerciciosResueltos: 1 }, examen2: { nota: 48, asistencia: 13, usoHerramienta: false, tiempoEstudio: 3, ejerciciosResueltos: 2 } },
+        { nombre: "Estudiante 20", examen1: { nota: 85, asistencia: 20, tiempoEstudio: 10, ejerciciosResueltos: 5 }, examen2: { nota: 98, asistencia: 20, usoHerramienta: true, tiempoEstudio: 11, ejerciciosResueltos: 5 } },
+        { nombre: "Estudiante 21", examen1: { nota: 57, asistencia: 16, tiempoEstudio: 5, ejerciciosResueltos: 3 }, examen2: { nota: 71, asistencia: 17, usoHerramienta: true, tiempoEstudio: 6, ejerciciosResueltos: 4 } },
+        { nombre: "Estudiante 22", examen1: { nota: 63, asistencia: 17, tiempoEstudio: 6, ejerciciosResueltos: 3 }, examen2: { nota: 79, asistencia: 18, usoHerramienta: false, tiempoEstudio: 7, ejerciciosResueltos: 4 } },
+        { nombre: "Estudiante 23", examen1: { nota: 32, asistencia: 11, tiempoEstudio: 2, ejerciciosResueltos: 1 }, examen2: { nota: 52, asistencia: 13, usoHerramienta: true, tiempoEstudio: 4, ejerciciosResueltos: 2 } },
+        { nombre: "Estudiante 24", examen1: { nota: 77, asistencia: 20, tiempoEstudio: 11, ejerciciosResueltos: 5 }, examen2: { nota: 91, asistencia: 20, usoHerramienta: true, tiempoEstudio: 10, ejerciciosResueltos: 5 } },
+        { nombre: "Estudiante 25", examen1: { nota: 47, asistencia: 14, tiempoEstudio: 3, ejerciciosResueltos: 2 }, examen2: { nota: 67, asistencia: 15, usoHerramienta: false, tiempoEstudio: 5, ejerciciosResueltos: 3 } },
+        { nombre: "Estudiante 26", examen1: { nota: 69, asistencia: 18, tiempoEstudio: 7, ejerciciosResueltos: 4 }, examen2: { nota: 83, asistencia: 19, usoHerramienta: true, tiempoEstudio: 7, ejerciciosResueltos: 4 } },
+        { nombre: "Estudiante 27", examen1: { nota: 51, asistencia: 15, tiempoEstudio: 4, ejerciciosResueltos: 2 }, examen2: { nota: 59, asistencia: 16, usoHerramienta: false, tiempoEstudio: 5, ejerciciosResueltos: 3 } },
+        { nombre: "Estudiante 28", examen1: { nota: 72, asistencia: 19, tiempoEstudio: 9, ejerciciosResueltos: 4 }, examen2: { nota: 87, asistencia: 20, usoHerramienta: true, tiempoEstudio: 9, ejerciciosResueltos: 5 } },
+        { nombre: "Estudiante 29", examen1: { nota: 37, asistencia: 12, tiempoEstudio: 1, ejerciciosResueltos: 1 }, examen2: { nota: 47, asistencia: 13, usoHerramienta: false, tiempoEstudio: 3, ejerciciosResueltos: 2 } },
+        { nombre: "Estudiante 30", examen1: { nota: 84, asistencia: 20, tiempoEstudio: 10, ejerciciosResueltos: 5 }, examen2: { nota: 97, asistencia: 20, usoHerramienta: true, tiempoEstudio: 11, ejerciciosResueltos: 5 } },
+        { nombre: "Estudiante 31", examen1: { nota: 59, asistencia: 16, tiempoEstudio: 5, ejerciciosResueltos: 3 }, examen2: { nota: 73, asistencia: 17, usoHerramienta: true, tiempoEstudio: 6, ejerciciosResueltos: 4 } },
+        { nombre: "Estudiante 32", examen1: { nota: 61, asistencia: 17, tiempoEstudio: 6, ejerciciosResueltos: 3 }, examen2: { nota: 77, asistencia: 18, usoHerramienta: false, tiempoEstudio: 7, ejerciciosResueltos: 4 } },
+        { nombre: "Estudiante 33", examen1: { nota: 33, asistencia: 11, tiempoEstudio: 2, ejerciciosResueltos: 1 }, examen2: { nota: 53, asistencia: 13, usoHerramienta: true, tiempoEstudio: 4, ejerciciosResueltos: 2 } },
+        { nombre: "Estudiante 34", examen1: { nota: 76, asistencia: 20, tiempoEstudio: 11, ejerciciosResueltos: 5 }, examen2: { nota: 90, asistencia: 20, usoHerramienta: true, tiempoEstudio: 10, ejerciciosResueltos: 5 } },
+        { nombre: "Estudiante 35", examen1: { nota: 49, asistencia: 14, tiempoEstudio: 3, ejerciciosResueltos: 2 }, examen2: { nota: 69, asistencia: 15, usoHerramienta: false, tiempoEstudio: 5, ejerciciosResueltos: 3 } }
     ];
 
     // --- Lógica de Pestañas ---
@@ -149,14 +176,14 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             // Para valores que no caen perfectamente en los bins (ej. 90.5 si binSize es 10)
             if (!foundBin && value >= 0 && value <= maxVal) {
-                 // Buscar el bin más cercano o un bin específico para valores exactos.
-                 // Para este simple histograma, asignamos a su bin inicial
-                 const binKey = `${Math.floor(value / binSize) * binSize}-${Math.min(Math.floor(value / binSize) * binSize + binSize -1, maxVal)}`;
-                 if(bins[binKey] !== undefined) {
-                    bins[binKey]++;
-                 } else {
-                    console.warn(`Valor ${value} fuera de rango o sin bin asignado en ${canvasId}`);
-                 }
+                    // Buscar el bin más cercano o un bin específico para valores exactos.
+                    // Para este simple histograma, asignamos a su bin inicial
+                    const binKey = `${Math.floor(value / binSize) * binSize}-${Math.min(Math.floor(value / binSize) * binSize + binSize -1, maxVal)}`;
+                    if(bins[binKey] !== undefined) {
+                        bins[binKey]++;
+                    } else {
+                        console.warn(`Valor ${value} fuera de rango o sin bin asignado en ${canvasId}`);
+                    }
             }
         });
 
@@ -179,6 +206,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             options: {
                 responsive: true,
+                maintainAspectRatio: false, // Allow charts to adapt to container height
                 plugins: {
                     legend: { display: false },
                     title: {
@@ -221,6 +249,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             options: {
                 responsive: true,
+                maintainAspectRatio: false, // Allow charts to adapt to container height
                 plugins: {
                     legend: {
                         position: 'bottom',
@@ -263,6 +292,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             options: {
                 responsive: true,
+                maintainAspectRatio: false, // Allow charts to adapt to container height
                 plugins: {
                     legend: { position: 'top', labels: { color: colores.light } },
                     title: {
@@ -295,14 +325,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 datasets: [
                     {
                         label: 'Usó Herramienta',
-                        data: dataUsuariosHerramienta.map(e => ({ x: e.examen2.nota, y: e.examen2.ejerciciosResueltos })), // Nota vs Ejercicios
+                        data: dataUsuariosHerramienta.map(e => ({ x: e.examen2.nota, y: e.examen2.ejerciciosResueltos, nombre: e.nombre })),
                         backgroundColor: colores.success,
                         pointRadius: 6,
                         pointHoverRadius: 8
                     },
                     {
                         label: 'No Usó Herramienta',
-                        data: dataNoUsuariosHerramienta.map(e => ({ x: e.examen2.nota, y: e.examen2.ejerciciosResueltos })), // Nota vs Ejercicios
+                        data: dataNoUsuariosHerramienta.map(e => ({ x: e.examen2.nota, y: e.examen2.ejerciciosResueltos, nombre: e.nombre })),
                         backgroundColor: colores.danger,
                         pointRadius: 6,
                         pointHoverRadius: 8
@@ -311,6 +341,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             options: {
                 responsive: true,
+                maintainAspectRatio: false, // Allow charts to adapt to container height
                 plugins: {
                     legend: {
                         position: 'top',
@@ -320,6 +351,21 @@ document.addEventListener('DOMContentLoaded', () => {
                         display: true,
                         text: 'Relación entre Nota (Examen 2) y Ejercicios Resueltos por Uso de Herramienta',
                         color: colores.light
+                    },
+                    tooltip: { // Chart.js v4+ tooltip configuration
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.raw.nombre) { // Access the custom 'nombre' property
+                                    label += `Estudiante: ${context.raw.nombre}, `;
+                                }
+                                label += `Nota: ${context.parsed.x}, Ejercicios: ${context.parsed.y}`;
+                                return label;
+                            }
+                        }
                     }
                 },
                 scales: {
@@ -338,15 +384,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         max: 5,
                         ticks: { color: colores.light, stepSize: 1 },
                         grid: { color: colores.dark }
-                    }
-                },
-                tooltips: { // Configuración para mostrar la etiqueta del estudiante en el tooltip (Chart.js v2)
-                    callbacks: {
-                        label: function(tooltipItem, data) {
-                            var dataset = data.datasets[tooltipItem.datasetIndex];
-                            var index = tooltipItem.index;
-                            return estudiantesCalculoII[index].nombre + ': (Nota: ' + dataset.data[index].x + ', Ejercicios: ' + dataset.data[index].y + ')';
-                        }
                     }
                 }
             }
@@ -417,6 +454,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             options: {
                 responsive: true,
+                maintainAspectRatio: false, // Allow charts to adapt to container height
                 plugins: {
                     legend: {
                         position: 'top',
