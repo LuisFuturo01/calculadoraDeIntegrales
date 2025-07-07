@@ -1,3 +1,2 @@
-sympy
-matplotlib
-numpy
+Flask==3.0.0
+SymPy==1.12
