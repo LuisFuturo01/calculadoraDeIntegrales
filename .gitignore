@@ -23,3 +23,6 @@ Thumbs.db
 
 # Logs
 *.log
+
+#simulacion de datos
+./simulacionDeDatos/
