@@ -1,69 +1,68 @@
-// curious_functions.js
-
 document.addEventListener('DOMContentLoaded', () => {
 
     // Configuration for each GeoGebra applet
     const ggbAppletConfigs = {
         ggbApplet1: {
-            formula: (k) => `f(x) = (x-${k})^2`,
+            formula: (k) => `f(x) = (x-k)^2`, // Changed from ${k} to k
             initialK: 0,
             xMin: -2, xMax: 2, yMin: -5, yMax: 15,
             criticalRange: null // No critical range for parabola
         },
         ggbApplet2: {
-            formula: (k) => `f(x) = sin(${k}x)`,
+            formula: (k) => `f(x) = sin(kx)`, // Changed from ${k} to k
             initialK: 1,
             xMin: 0, xMax: Math.PI, yMin: -2, yMax: 2,
             criticalRange: null // No critical range for sine
         },
         ggbApplet3: {
-            formula: (k) => `f(x) = exp(${k}x)`,
+            formula: (k) => `f(x) = exp(kx)`, // Changed from ${k} to k
             initialK: 0.5,
             xMin: -1, xMax: 1, yMin: -5, yMax: 10,
             criticalRange: null // No critical range for exponential
         },
         ggbApplet4: {
-            formula: (k) => `f(x) = ${k}*ln(x)`,
+            formula: (k) => `f(x) = k*ln(x)`, // Changed from ${k} to k
             initialK: 1,
             xMin: 1, xMax: 5, yMin: -5, yMax: 5,
             // For ln(x), indeterminacy is x <= 0. Define a range around 0.
             criticalRange: (k, step) => ({ min: 0 - step * 2, max: 0 + step * 2 }) // Range around 0
         },
         ggbApplet5: {
-            formula: (k) => `f(x) = ${k}/x`,
+            formula: (k) => `f(x) = k/x`, // Changed from ${k} to k
             initialK: 1,
             xMin: 1, xMax: 5, yMin: -10, yMax: 10,
             // For 1/x, indeterminacy is at x = 0.
             criticalRange: (k, step) => ({ min: 0 - step * 2, max: 0 + step * 2 }) // Range around 0
         },
         ggbApplet6: {
-            formula: (k) => `f(x) = 1/(x-${k})`,
+            formula: (k) => `f(x) = 1/(x-k)`, // Changed from ${k} to k
             initialK: 0,
             xMin: -2, xMax: 2, yMin: -5, yMax: 5,
-            // For 1/(x-k), indeterminacy is at x = k. Define range around k.
+            // Se mantiene a null para que el área siempre intente mostrarse,
+            // incluso si hay una singularidad. GeoGebra manejará la visualización.
             criticalRange: (k, step) => ({ min: k - step * 2, max: k + step * 2 })
         },
         ggbApplet7: {
-            formula: (k) => `f(x) = x^${k}`,
+            formula: (k) => `f(x) = x^k`, // Changed from ${k} to k
             initialK: 2,
             xMin: 0.5, xMax: 2, yMin: -5, yMax: 10,
             // For x^k, if k < 0, indeterminacy at x = 0.
             criticalRange: (k, step) => (k < 0 ? { min: 0 - step * 2, max: 0 + step * 2 } : null)
         },
         ggbApplet8: {
-            formula: (k) => `f(x) = exp(-${k}*x)*sin(x)`,
+            formula: (k) => `f(x) = exp(-k*x)*sin(x)`, // Changed from ${k} to k
             initialK: 0.1,
             xMin: 0, xMax: Math.PI * 2, yMin: -1.5, yMax: 1.5,
             criticalRange: null // No critical range
         },
         ggbApplet9: {
-            formula: (k) => `f(x) = x^3 - ${k}*x`,
+            formula: (k) => `f(x) = x^3 - k*x`, // Changed from ${k} to k
             initialK: 1,
             xMin: -1, xMax: 1, yMin: -5, yMax: 5,
             criticalRange: null // No critical range
         },
         ggbApplet10: {
-            formula: (k) => `f(x) = ${k}*abs(x)`,
+            formula: (k) => `f(x) = k*abs(x)`, // Changed from ${k} to k
             initialK: 1,
             xMin: -2, xMax: 2, yMin: 0, yMax: 10,
             criticalRange: null // No critical range
@@ -71,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const ggbApplets = {}; // Stores references to GeoGebra API objects by ggbId
-    const currentCoords = {}; // Stores current xMin, xMax, yMin, yMax for each applet by ggbId (still needed for integral calculation)
+    const currentCoords = {}; // Stores current xMin, xMax, yMin, yMax for each applet by ggbId
     const currentKValues = {}; // Store current 'k' value for each applet
 
     // Helper to get decimal places from step
@@ -86,17 +85,19 @@ document.addEventListener('DOMContentLoaded', () => {
         return Math.max(range1Min, range2Min) < Math.min(range1Max, range2Max);
     };
 
-    // Function to ensure A, B, and k are always visible and draggable
-    const setGGBObjectsAlwaysVisibleAndDraggable = (api) => {
-        api.setVisible('A', true);
-        api.setVisible('B', true);
-        api.setVisible('k', true);
-        api.setLabelVisible('A', true);
-        api.setLabelVisible('B', true);
-        api.setLabelVisible('k', true);
-        api.setFixed('A', false, false); // false = not fixed, so draggable
-        api.setFixed('B', false, false); // false = not fixed, so draggable
-        api.setFixed('k', false, false); // false = not fixed, so draggable
+    // Function to ensure a, b, and k are visible/hidden and draggable/fixed
+    const setGGBObjectsVisibilityAndFixed = (api, visible, fixed) => {
+        api.setVisible('a', visible); // Refer to numerical variable 'a'
+        api.setVisible('b', visible); // Refer to numerical variable 'b'
+        api.setVisible('k', visible);
+        api.setLabelVisible('a', visible);
+        api.setLabelVisible('b', visible);
+        api.setLabelVisible('k', visible);
+        // For numerical sliders, the third argument of setFixed should be true
+        // to enable/disable dragging of the slider in GeoGebra's UI.
+        api.setFixed('a', fixed, true); 
+        api.setFixed('b', fixed, true); 
+        api.setFixed('k', fixed, true); 
     };
 
     // Function to update the integral display for a specific applet
@@ -130,12 +131,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
+            // Get the integral value regardless of problematic status for display
+            const integralValue = api.getValue('c'); 
+
             if (isIntegralProblematic) {
                 integralResultDiv.innerHTML = `Integral: Indefinida o con singularidad en el intervalo`;
                 integralResultDiv.style.color = 'orange'; // Highlight warning
-                api.setVisible('c', false); // Hide the integral area
+                // Para ggbApplet6, forzar la visibilidad del área de la integral incluso si es problemática
+                // Esto permite que GeoGebra intente dibujarla a pesar de la singularidad.
+                if (ggbId === 'ggbApplet6') {
+                    api.setVisible('c', true); 
+                } else {
+                    api.setVisible('c', false); // Ocultar para otros casos problemáticos
+                }
             } else {
-                const integralValue = api.getValue('c'); // Get integral value only if not problematic
                 if (integralValue !== undefined && !isNaN(integralValue)) {
                     integralResultDiv.innerHTML = `Integral: $$\\int_{${currentXMin.toFixed(displayPrecision)}}^{${currentXMax.toFixed(displayPrecision)}} f(x) dx = ${integralValue.toFixed(4)}$$`;
                     integralResultDiv.style.color = ''; // Reset color
@@ -157,7 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Function to handle slider input for a specific applet
     const handleSliderInput = (ggbId, slider) => {
         const paramType = slider.dataset.paramType;
-        let value = parseFloat(slider.value); // Use 'let' to allow modification
+        let value = parseFloat(slider.value); 
         
         const sliderNum = ggbId.replace('ggbApplet', '');
         const valueSpan = document.getElementById(`${paramType}Value${sliderNum}`);
@@ -180,7 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Update currentKValue if 'k' slider is being moved
         if (paramType === 'k') {
             currentKValues[ggbId] = value;
-            api.evalCommand(config.formula(value)); // Always update function formula
+            api.evalCommand(config.formula(value)); // Update function formula in GeoGebra
             api.evalCommand(`k = ${value}`); // Update GeoGebra's k variable
         }
 
@@ -198,7 +207,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let a = parseFloat(xMinSlider.value);
         let b = parseFloat(xMaxSlider.value);
 
-        // Update a or b based on which slider was moved
+        // Coordinate xMin and xMax sliders
         if (paramType === 'xMin') {
             a = value;
             if (a >= b) {
@@ -206,7 +215,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 xMaxSlider.value = b;
                 xMaxSpan.textContent = b.toFixed(decimalPlaces(currentStep));
             }
-            xMaxSlider.min = a;
+            xMaxSlider.min = a; // Ensure xMax cannot go below current xMin
         } else if (paramType === 'xMax') {
             b = value;
             if (b <= a) {
@@ -214,7 +223,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 xMinSlider.value = a;
                 xMinSpan.textContent = a.toFixed(decimalPlaces(currentStep));
             }
-            xMinSlider.max = b;
+            xMinSlider.max = b; // Ensure xMin cannot go above current xMax
         }
         
         // Update currentCoords with the latest slider values
@@ -229,15 +238,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (shouldSendToGeoGebra) {
-            // Update the coordinates of the invisible points A and B
-            api.evalCommand(`A = (${a}, 0)`);
-            api.evalCommand(`B = (${b}, 0)`);
-            api.evalCommand(`c = Integral(f, x(A), x(B))`); // Integrate between the points
-            // Always ensure the coordinate system is set by YOUR sliders.
-            api.setCoordSystem(currentCoords[ggbId].xMin, currentCoords[ggbId].xMax,
-                               currentCoords[ggbId].yMin, currentCoords[ggbId].yMax);
+            // Update the numerical variables 'a' and 'b' in GeoGebra
+            api.evalCommand(`a = ${a}`);
+            api.setVisible('a', true); // Ensure 'a' is visible       
+            api.evalCommand(`b = ${b}`);
+            api.setVisible('b', true); // Ensure 'a' is visible 
+            
+            // Re-evaluate the integral with the new 'a' and 'b' values
+            api.evalCommand(`c = Integral(f, a, b)`); 
+            api.setVisible('c', true); // Ensure integral is visible if valid
         } else {
-            // If problematic, ensure integral and points are hidden and don't force updates
+            // If problematic, ensure integral is hidden
             api.setVisible('c', false);
         }
         
@@ -269,11 +280,11 @@ document.addEventListener('DOMContentLoaded', () => {
             enableLabelDrags: false,
             enableShiftDragZoom: true,
             capturingThreshold: null,
-            // Removed showFullscreenButton: true, as it might be redundant if GeoGebra's UI is always active
+            showFullscreenButton: true,
             showZoomButtons: true,
             showFieldText: false, // Ensures algebra window is not shown
             language: 'es',
-            appletOnLoad: function(api) {
+            appletOnLoad: (api) => {
                 ggbApplets[ggbId] = api;
                 
                 currentKValues[ggbId] = config.initialK;
@@ -285,43 +296,48 @@ document.addEventListener('DOMContentLoaded', () => {
                     yMax: config.yMax
                 };
 
-                // Set initial coordinate system based on config
-                api.setCoordSystem(currentCoords[ggbId].xMin, currentCoords[ggbId].xMax,
-                                   currentCoords[ggbId].yMin, currentCoords[ggbId].yMax);
+                // No se llama a api.setCoordSystem aquí para permitir que GeoGebra maneje su zoom inicial
                 
-                // Define 'k' as a simple number
+                // Define 'k', 'a', and 'b' as simple numbers (sliders)
                 api.evalCommand(`k = ${config.initialK}`);
-
-                // Define 'A' and 'B' as actual points on the x-axis
-                api.evalCommand(`A = (${currentCoords[ggbId].xMin}, 0)`);
-                api.evalCommand(`B = (${currentCoords[ggbId].xMax}, 0)`);
+                api.evalCommand(`a = ${currentCoords[ggbId].xMin}`); // Define 'a' as a number
+                api.evalCommand(`b = ${currentCoords[ggbId].xMax}`); // Define 'b' as a number
                 
-                // Ensure A, B, and k are ALWAYS visible and draggable from the start
-                setGGBObjectsAlwaysVisibleAndDraggable(api);
+                // Initially hide and fix a, b, and k (for non-fullscreen state)
+                // true for fixed means they cannot be dragged in GeoGebra's view, only via HTML sliders
+                
+                setGGBObjectsVisibilityAndFixed(api, true, true); 
 
                 // Define the function using the 'k' variable
                 api.evalCommand(config.formula(config.initialK));
 
-                // Define integral 'c' using the x-coordinates of the points A and B
-                api.evalCommand(`c = Integral(f, x(A), x(B))`);
+                // Define integral 'c' using the numerical variables 'a' and 'b'
+                api.evalCommand(`c = Integral(f, a, b)`);
                 api.setColor('c', 0, 150, 136);
                 api.setFilling('c', 0.5);
                 
                 updateIntegralDisplay(ggbId, api); // Initial display state
-
-                // The fullscreen listener is no longer needed to toggle visibility of A, B, k.
-                // It can be kept if you want to perform other actions on fullscreen toggle.
-                // For now, I'll keep it but remove the visibility logic.
+                
+                // Register listener for fullscreen changes
                 api.registerClientListener((event) => {
-                    if (event.type === 'is and fullscreen') {
-                        console.log(`Fullscreen toggled for ${ggbId}. Fullscreen state: ${event.fullScreen}`);
-                        // No changes to A, B, k visibility here, as they are always visible.
-                        // You might want to adjust the coordinate system here if you want
-                        // GeoGebra to auto-zoom in fullscreen, but the request is for
-                        // "si o si aparezcan en pantalla los slides de geogebra, activa su visibility"
-                        // which implies keeping the current view.
-                    }
-                });
+    if (event.type === 'fullscreenchange') {
+        alert(`⚡ Evento recibido para ${ggbId}\nEstado: ${event.fullScreen}`);
+
+        const container = document.getElementById(ggbId);
+        const isFullscreen = document.fullscreenElement === container;
+        alert(`¿Contenedor en fullscreen?: ${isFullscreen}`);
+
+        if (isFullscreen) {
+            alert("Entrando a fullscreen 🚀");
+            setGGBObjectsVisibilityAndFixed(api, true, false);
+        } else {
+            alert("Saliendo de fullscreen 🛬");
+            setGGBObjectsVisibilityAndFixed(api, false, true);
+        }
+    }
+});
+
+
 
                 const sliderNum = ggbId.replace('ggbApplet', '');
                 const kSlider = document.getElementById(`kSlider${sliderNum}`) || document.querySelector(`.k-slider[data-ggb-id="${ggbId}"]`);
@@ -330,7 +346,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 const initialXMin = config.xMin;
                 const initialXMax = config.xMax;
-                const step = 0.01;
+                const step = 0.01; // Default step for limits
 
                 if (kSlider) {
                     const kValueSpan = document.getElementById(`kValue${sliderNum}`);
@@ -365,6 +381,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     xMaxSlider.addEventListener('input', () => handleSliderInput(ggbId, xMaxSlider));
                 }
 
+                // Ensure initial coordination of limit sliders
                 if (xMinSlider && xMaxSlider) {
                     xMaxSlider.min = parseFloat(xMinSlider.value);
                     xMinSlider.max = parseFloat(xMaxSlider.value);
@@ -391,10 +408,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (api.getGridWidth() !== computedWidth || api.getGridHeight() !== computedHeight) {
                         api.setSize(computedWidth, computedHeight);
                     }
-                    const coords = currentCoords[ggbId];
-                    if (coords) {
-                        api.setCoordSystem(coords.xMin, coords.xMax, coords.yMin, coords.yGuy); // Corrected typo
-                    }
+                    // No se llama a api.setCoordSystem aquí
                 });
             }
         }

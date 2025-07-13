@@ -23,13 +23,10 @@
     <div class="contenedor">
         <h1>Explorador de Funciones Curiosas</h1>
 
-        <p class="intro-text">
-            Aquí puedes explorar cómo diferentes funciones cambian al modificar una constante 'k'
-            y **visualizar su integral definida** entre los límites del eje X.
-        </p>
+       
 
         <section class="function-section">
-            <h2>1. Parábola con Vértice Ajustable: $f(x) = (x - k)^2$</h2>
+            <h2>1. Parábola con Vértice Ajustable: $$f( x ) = (x - k)^2$$</h2>
             <div class="slider-group">
                 <div class="slider-container">
                     <span>Valor de k: <span id="kValue1">0.0</span></span>
@@ -49,7 +46,7 @@
         </section>
 
         <section class="function-section">
-            <h2>2. Onda Senoidal (Frecuencia): $f(x) = \sin(kx)$</h2>
+            <h2>2. Onda Senoidal (Frecuencia): $$f(x) = \sin(kx)$$</h2>
             <div class="slider-group">
                 <div class="slider-container">
                     <span>Valor de k: <span id="kValue2">1.0</span></span>
@@ -57,11 +54,11 @@
                 </div>
                 <div class="slider-container limit-slider">
                     <span>Límite Inf. (X): <span id="xMinValue2"></span></span>
-                    <input type="range" id="xMinSlider2" min="-10" max="10" value="0" step="0.01" class="limit-slider x-min-slider" data-ggb-id="ggbApplet2" data-param-type="xMin">
+                    <input type="range" id="xMinSlider2" min="-10" max="10" value="0" step="0.01" class="limit-slider k-slider" data-ggb-id="ggbApplet2" data-param-type="xMin">
                 </div>
                 <div class="slider-container limit-slider">
                     <span>Límite Sup. (X): <span id="xMaxValue2"></span></span>
-                    <input type="range" id="xMaxSlider2" min="-10" max="10" value="0" step="0.01" class="limit-slider x-max-slider" data-ggb-id="ggbApplet2" data-param-type="xMax">
+                    <input type="range" id="xMaxSlider2" min="-10" max="10" value="0" step="0.01" class="limit-slider k-slider" data-ggb-id="ggbApplet2" data-param-type="xMax">
                 </div>
             </div>
             <div class="ggb-element" id="ggbApplet2"></div>
@@ -69,7 +66,7 @@
         </section>
 
         <section class="function-section">
-            <h2>3. Función Exponencial: $f(x) = e^{kx}$</h2>
+            <h2>3. Función Exponencial: $$f(x) = e^{kx}$$</h2>
             <div class="slider-group">
                 <div class="slider-container">
                     <span>Valor de k: <span id="kValue3">0.5</span></span>
@@ -89,7 +86,7 @@
         </section>
 
         <section class="function-section">
-            <h2>4. Función Logarítmica Escalada: $f(x) = k \ln(x)$</h2>
+            <h2>4. Función Logarítmica Escalada: $$f(x) = k \ln(x)$$</h2>
             <div class="slider-group">
                 <div class="slider-container">
                     <span>Valor de k: <span id="kValue4">1.0</span></span>
@@ -109,7 +106,7 @@
         </section>
 
         <section class="function-section">
-            <h2>5. Hipérbola Ajustable: $f(x) = k/x$</h2>
+            <h2>5. Hipérbola Ajustable: $$f(x) = k/x$$</h2>
             <div class="slider-group">
                 <div class="slider-container">
                     <span>Valor de k: <span id="kValue5">1.0</span></span>
@@ -129,7 +126,7 @@
         </section>
 
         <section class="function-section">
-            <h2>6. Racional con Asíntota Móvil: $f(x) = 1/(x - k)$</h2>
+            <h2>6. Racional con Asíntota Móvil: $$f(x) = 1/(x - k)$$</h2>
             <div class="slider-group">
                 <div class="slider-container">
                     <span>Valor de k: <span id="kValue6">0.0</span></span>
@@ -149,7 +146,7 @@
         </section>
 
         <section class="function-section">
-            <h2>7. Función de Potencia: $f(x) = x^k$</h2>
+            <h2>7. Función de Potencia: $$f(x) = x^k$$</h2>
             <div class="slider-group">
                 <div class="slider-container">
                     <span>Valor de k: <span id="kValue7">2.0</span></span>
@@ -169,7 +166,7 @@
         </section>
 
         <section class="function-section">
-            <h2>8. Onda Amortiguada: $f(x) = e^{-kx} \sin(x)$</h2>
+            <h2>8. Onda Amortiguada: $$f(x) = e^{-kx} \sin(x)$$</h2>
             <div class="slider-group">
                 <div class="slider-container">
                     <span>Valor de k: <span id="kValue8">0.1</span></span>
@@ -189,7 +186,7 @@
         </section>
 
         <section class="function-section">
-            <h2>9. Cúbica con Inflexión: $f(x) = x^3 - kx$</h2>
+            <h2>9. Cúbica con Inflexión: $$f(x) = x^3 - kx$$</h2>
             <div class="slider-group">
                 <div class="slider-container">
                     <span>Valor de k: <span id="kValue9">1.0</span></span>
@@ -209,7 +206,7 @@
         </section>
 
         <section class="function-section">
-            <h2>10. Valor Absoluto (Pendiente): $f(x) = k|x|$</h2>
+            <h2>10. Valor Absoluto (Pendiente): $$f(x) = k|x|$$</h2>
             <div class="slider-group">
                 <div class="slider-container">
                     <span>Valor de k: <span id="kValue10">1.0</span></span>

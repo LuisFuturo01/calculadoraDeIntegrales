@@ -84,7 +84,9 @@ calculadoraDeIntegrales/
 ├── form.html        # Sitio donde se agrega los datos de los estudiantes
 ├── form.css        # Estilos del formulario, tematica dark
 ├── form.js        # Conexion a firebase, y envio de información, logica general
-├── form.css        # Conexion a firebase, y envio de información, logica general
+├── cerious_functions.html        # Sitio estan graficas mas rebuscadas con k constante
+├── cerious_functions.css        # Estilos general de las graficas geogebra
+├── cerious_functions.js        # Logica general de graficas geogebra + implementación
 ├── README.md           # Este archivo
 └── .gitignore          # Archivos a ignorar en Git
 ```

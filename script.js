@@ -64,11 +64,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     previsualizacionFuncion.innerHTML = `\\(${datos.latex}\\)`;
                 } else {
                     // Si el backend devuelve un error de sintaxis, lo mostramos
-                    previsualizacionFuncion.innerHTML = `<span style="color: var(--color-resaltado-secundario); font-size: 0.9em;">${datos.error || 'Error de sintaxis.'}</span>`;
+                    previsualizacionFuncion.innerHTML = `<span class="errorPrev">${datos.error || 'Error de sintaxis.'}</span>`;
                 }
             } catch (error) {
                 // Error de red u otro error inesperado
-                previsualizacionFuncion.innerHTML = `<span style="color: var(--color-resaltado-secundario); font-size: 0.9em;">Error de conexión.</span>`;
+                previsualizacionFuncion.innerHTML = `<span class"errorPrev">Error de conexión.</span>`;
                 console.error("Error al previsualizar:", error);
             }
         } else {
@@ -145,6 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         ggbApplet.evalCommand(`a = ${a}`);
                         ggbApplet.evalCommand(`b = ${b}`);
                         ggbApplet.evalCommand(`c = Integral(f, a, b)`);
+                        
                     }
                     if (valorDeslizadorA) valorDeslizadorA.textContent = a.toFixed(2);
                     if (valorDeslizadorB) valorDeslizadorB.textContent = b.toFixed(2);
@@ -202,9 +203,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     botonCalcular.addEventListener('click', async () => {
-        limpiarResultados(); // Limpia los resultados anteriores
+        const contenedor = document.getElementById('previsualizacionFuncion');
+        const span = contenedor?.querySelector('span');
         const section1 = document.getElementById('seccionResultados');
         const section2 = document.getElementById('seccionGeoGebra');
+
+        if (span && span.classList.contains('errorPrev')) {
+            section1.style.display = 'none'; // Oculta la sección de resultados si hay un error de previsualización
+            section2.style.display = 'none'; // Oculta la sección de GeoGebra si
+        }else{
+
+        limpiarResultados(); // Limpia los resultados anteriores
+        
         section1.style.display = 'block'; // Muestra la sección de resultados
         section2.style.display = 'block'; // Muestra la sección de GeoGebra
         const strFuncion = inputFuncion.value;
@@ -272,6 +282,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // --- Lógica de GeoGebra que se ejecuta SOLO al presionar Calcular ---
             if (!ggbApplet) {
                 // Si el applet no está inicializado, lo inicializamos ahora
+    
                 const params = {
                     "appName": "graphing",
                     "showToolBar": false,
@@ -279,7 +290,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     "showMenuBar": false,
                     "width": 800,
                     "height": 400,
-                    "appletOnLoad": function(api) {
+                    "showFullscreenButton": true,
+                    "enableRightClick": true,
+                    "enableLabelDrags": true,
+                    "enableShiftDragZoom": true,
+                    "showZoomButtons": true,
+                    "showFullscreenButton": true,
+                    "appletOnLoad": (api) => {
                         ggbApplet = api; // Asigna la instancia de la API globalmente
                         updateGeoGebraGraph(); // Carga la gráfica inicial con los valores actuales
                     }
@@ -295,6 +312,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Error al calcular:', error);
             alert(`Error: ${error.message}`);
             limpiarResultados(); 
+        }
         }
     });
 

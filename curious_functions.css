@@ -1,14 +1,107 @@
 /* curious_functions.css */
 
-.intro-text {
+/* Root variables and general body styles (assuming these are in style.css or similar and are consistent) */
+/* If not, ensure you have basic styling for body, header, footer, and the main .contenedor */
+
+/* Example basic styles (if not provided elsewhere, you might need these in style.css or here) */
+:root {
+    --color-fondo-principal: #1c1c22;
+    --color-borde-oscuro: #282830;
+    --color-borde-claro: #3a3a45;
+    --color-texto-principal: #e0e0e0;
+    --color-texto-secundario: #a0a0a5;
+    --color-resaltado-primario: #ffb703; /* Gold/Orange for headings */
+    --color-resaltado-secundario: #61dafb; /* Cyan/Blue for accents */
+    --color-fondo-seccion: #22222a; /* Slightly lighter than --color-borde-oscuro */
+    --color-sombra: rgba(0, 0, 0, 0.4);
+    --color-sombra-clara: rgba(97, 218, 251, 0.3);
+    --transicion-suave: all 0.3s ease-in-out;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    background-color: var(--color-fondo-principal);
+    color: var(--color-texto-principal);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+.header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #282c34; /* Assuming header color from form.css */
+    color: #ffc107; /* Assuming header text color from form.css */
+    padding: 0 30px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    box-sizing: border-box;
+    border-bottom: 2px solid #61dafb;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.6em;
+    font-weight: 700;
+    text-shadow: 0 0 5px rgba(255, 193, 7, 0.8);
+    height: 70px;
+}
+
+.logo-header {
+    font-size: 1em;
+    letter-spacing: 1px;
+}
+
+.nav-header {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-link {
+    color: #61dafb;
+    background: none;
+    border: none;
+    font-size: 0.7em;
+    font-family: inherit;
+    font-weight: 700;
+    text-decoration: none;
+    padding: 8px 18px;
+    border-radius: 6px;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+}
+
+.nav-link.active,
+.nav-link:hover {
+    background: #61dafb;
+    color: #282c34;
+    text-shadow: none;
+}
+
+.contenedor {
+    flex-grow: 1;
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto 40px auto; /* Adjust top/bottom margin */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.contenedor h1 {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--color-resaltado-primario);
     text-align: center;
     margin-bottom: 40px;
-    color: var(--color-texto-secundario);
-    font-size: 1.1em;
-    line-height: 1.8;
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
+    font-size: 2.8em;
+    text-shadow: 0 0 10px rgba(255, 193, 7, 0.5);
+    border-bottom: 3px solid var(--color-resaltado-secundario);
+    padding-bottom: 15px;
 }
 
 .function-section {
@@ -17,39 +110,44 @@
     border-radius: 10px;
     margin-bottom: 30px;
     border: 1px solid var(--color-borde-claro);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 15px var(--color-sombra);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.function-section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
 }
 
 .function-section h2 {
     color: var(--color-resaltado-primario);
-    border-bottom: 1px dashed var(--color-borde-claro);
     padding-bottom: 10px;
     margin-top: 0;
     margin-bottom: 20px;
-    font-size: 1.4em;
     text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
+    text-transform: none;
+    font-size: 1.8em;
+    font-weight: 700;
     font-family: 'Montserrat', sans-serif;
 }
 
-/* New: Styling for MathJax rendered LaTeX inside h2 */
-.function-section h2 .mjx-chtml {
-    margin-left: 10px; /* Adjust spacing if needed */
-    font-size: 1.1em; /* Make the math slightly larger than surrounding text if desired */
-    color: var(--color-resaltado-secundario); /* Match highlight color for math */
+.function-section h2 .mjx-chtml { /* Style for MathJax equations inside h2 */
+    margin-left: 10px; /* Space between text and equation */
+    font-size: 0.9em; /* Adjust MathJax font size relative to h2 */
+    color: var(--color-resaltado-secundario);
 }
-
 
 /* New: Group for sliders */
 .slider-group {
     display: flex;
-    flex-wrap: wrap; /* Allows sliders to wrap to next line on smaller screens */
-    gap: 15px; /* Space between sliders */
+    flex-wrap: wrap;
+    gap: 20px; /* Increased gap for better spacing */
     margin-bottom: 25px;
-    justify-content: center; /* Center the slider groups */
+    justify-content: center;
 }
 
 .slider-container {
@@ -60,72 +158,85 @@
     padding: 15px 20px;
     border-radius: 8px;
     border: 1px solid var(--color-borde-claro);
-    flex: 1 1 calc(33% - 15px); /* Allows 3 sliders per row, adjusting for gap */
-    min-width: 280px; /* Minimum width before wrapping */
+    flex: 1 1 calc(33.33% - 20px); /* Adjust to distribute evenly with new gap */
+    min-width: 250px; /* Adjusted min-width for better wrapping */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.2s ease;
+}
+
+.slider-container:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .slider-container span {
     color: var(--color-texto-principal);
     font-size: 1em;
-    min-width: 100px;
+    min-width: 120px; /* Increased min-width for labels */
     text-align: right;
-    font-weight: 700;
+    font-weight: 600; /* Slightly reduced font-weight */
+    white-space: nowrap; /* Prevent label from wrapping */
 }
 
 .k-slider,
-.limit-slider { /* Apply styles to both types of sliders */
+.limit-slider {
     flex-grow: 1;
     -webkit-appearance: none;
-    height: 10px;
-    background: var(--color-borde-claro);
-    border-radius: 5px;
+    height: 12px; /* Slightly thicker slider track */
+    background: linear-gradient(to right, var(--color-resaltado-secundario) 0%, var(--color-borde-claro) 100%); /* Gradient track */
+    border-radius: 6px;
     outline: none;
-    opacity: 0.9;
-    transition: opacity .2s;
+    opacity: 0.95;
+    transition: opacity .2s, background 0.2s;
     cursor: grab;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .k-slider:hover,
 .limit-slider:hover {
     opacity: 1;
+    background: linear-gradient(to right, var(--color-resaltado-secundario) 0%, #7ecffb 100%); /* Lighter gradient on hover */
 }
 
 .k-slider::-webkit-slider-thumb,
 .limit-slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 25px;
-    height: 25px;
+    width: 28px; /* Slightly larger thumb */
+    height: 28px;
     border-radius: 50%;
-    background: var(--color-resaltado-secundario);
+    background: var(--color-resaltado-primario);
     cursor: grab;
-    border: 3px solid var(--color-fondo-principal);
-    box-shadow: 0 0 8px rgba(255, 193, 7, 0.7);
-    transition: background 0.2s, box-shadow 0.2s;
+    border: 4px solid var(--color-fondo-principal); /* Thicker border */
+    box-shadow: 0 0 10px rgba(255, 193, 7, 0.9); /* Stronger shadow */
+    transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
 }
 
 .k-slider::-webkit-slider-thumb:active,
 .limit-slider::-webkit-slider-thumb:active {
     cursor: grabbing;
     background: #e0ac00;
+    transform: scale(1.05); /* Slight scale on active */
+    box-shadow: 0 0 15px rgba(255, 193, 7, 1);
 }
 
 .k-slider::-moz-range-thumb,
 .limit-slider::-moz-range-thumb {
-    width: 25px;
-    height: 25px;
+    width: 28px;
+    height: 28px;
     border-radius: 50%;
-    background: var(--color-resaltado-secundario);
+    background: var(--color-resaltado-primario);
     cursor: grab;
-    border: 3px solid var(--color-fondo-principal);
-    box-shadow: 0 0 8px rgba(255, 193, 7, 0.7);
-    transition: background 0.2s, box-shadow 0.2s;
+    border: 4px solid var(--color-fondo-principal);
+    box-shadow: 0 0 10px rgba(255, 193, 7, 0.9);
+    transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
 }
 
 .k-slider::-moz-range-thumb:active,
 .limit-slider::-moz-range-thumb:active {
     cursor: grabbing;
     background: #e0ac00;
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(255, 193, 7, 1);
 }
 
 .ggb-element {
@@ -134,9 +245,9 @@
     border-radius: 8px;
     overflow: hidden;
     width: 100%;
-    aspect-ratio: 16/9; /* Maintain aspect ratio for graphs */
+    aspect-ratio: 16/9;
     margin: 20px auto 0 auto;
-    box-shadow: 0 4px 20px rgba(97, 218, 251, 0.6);
+    box-shadow: 0 4px 20px var(--color-sombra-clara);
     transition: box-shadow 0.3s ease;
 }
 
@@ -146,77 +257,180 @@
 
 .integral-result {
     text-align: center;
-    margin-top: 15px;
-    font-size: 1.2em;
+    margin-top: 20px; /* Increased margin-top */
+    font-size: 1.3em; /* Slightly larger font */
     font-weight: bold;
-    color: var(--color-resaltado-secundario); /* Or another highlight color */
+    color: var(--color-resaltado-secundario);
     background-color: var(--color-fondo-seccion);
-    padding: 10px;
-    border-radius: 5px;
+    padding: 12px 15px; /* Adjusted padding */
+    border-radius: 6px; /* Slightly larger border-radius */
     border: 1px solid var(--color-borde-claro);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.2s, box-shadow 0.2s;
 }
 
-
-/* Media Queries for Responsiveness */
-@media (max-width: 992px) {
-    .slider-container {
-        flex: 1 1 calc(50% - 10px); /* 2 sliders per row */
-    }
+.integral-result:hover {
+    background-color: #2b2b35; /* Slightly darker on hover */
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.3);
 }
 
-@media (max-width: 768px) {
-    .function-section {
-        padding: 15px;
-        margin-bottom: 25px;
+.footer {
+    width: 100%;
+    background-color: #282c34; /* Assuming footer color from header */
+    color: #a0a0a5; /* Assuming secondary text color */
+    text-align: center;
+    padding: 15px 0;
+    font-size: 0.9em;
+    border-top: 1px solid var(--color-borde-claro);
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* --- Media Queries for Responsiveness --- */
+
+/* Extra large screens (e.g., larger desktops, TVs) */
+@media (min-width: 1600px) {
+    .contenedor {
+        max-width: 1400px; /* Allow wider content on very large screens */
     }
 
     .function-section h2 {
-        font-size: 1.2em;
-        text-align: left;
-    }
-
-    .slider-group {
-        flex-direction: column; /* Stack sliders vertically */
-        align-items: center; /* Center them when stacked */
-        gap: 10px;
-    }
-
-    .slider-container {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-        padding: 10px 15px;
-        flex: 1 1 100%; /* Take full width when stacked */
-        min-width: unset;
+        font-size: 2em;
     }
 
     .slider-container span {
-        text-align: left;
-        width: 100%;
-        min-width: unset;
+        font-size: 1.05em;
+    }
+
+    .integral-result {
+        font-size: 1.4em;
+    }
+}
+
+
+/* Large screens (laptops, smaller desktops) */
+@media (max-width: 1200px) {
+    .contenedor {
+        width: 92%;
+        padding: 15px;
+    }
+
+    .function-section {
+        padding: 20px;
+    }
+
+    .function-section h2 {
+        font-size: 1.6em;
+    }
+
+    .slider-group {
+        gap: 15px;
+    }
+
+    .slider-container {
+        flex: 1 1 calc(33.33% - 15px); /* Ensure 3 per row still works well */
+        min-width: 230px;
+    }
+
+    .slider-container span {
+        min-width: 100px;
     }
 
     .k-slider,
     .limit-slider {
-        width: 100%;
+        height: 10px;
+    }
+
+    .k-slider::-webkit-slider-thumb,
+    .limit-slider::-webkit-slider-thumb {
+        width: 24px;
+        height: 24px;
+        border: 3px solid var(--color-fondo-principal);
+    }
+    .k-slider::-moz-range-thumb,
+    .limit-slider::-moz-range-thumb {
+        width: 24px;
+        height: 24px;
+        border: 3px solid var(--color-fondo-principal);
+    }
+
+    .integral-result {
+        font-size: 1.15em;
+        padding: 10px 12px;
     }
 }
 
-@media (max-width: 480px) {
-    .intro-text {
-        font-size: 1em;
+/* Medium screens (tablets, larger phones in landscape) */
+@media (max-width: 992px) {
+    .header {
+        height: auto;
+        flex-direction: column;
+        padding: 15px 20px;
+        gap: 10px;
+    }
+
+    .logo-header {
+        font-size: 1.5em;
+        margin-bottom: 5px;
+    }
+
+    .nav-header {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .nav-link {
+        font-size: 0.8em;
+        padding: 6px 12px;
+    }
+
+    .contenedor {
+        width: 95%;
+        margin: 15px auto 30px auto;
+        padding: 15px;
+    }
+
+    .contenedor h1 {
+        font-size: 2.2em;
         margin-bottom: 30px;
+        padding-bottom: 12px;
     }
 
     .function-section {
-        padding: 10px;
-        margin-bottom: 20px;
+        padding: 20px;
+        margin-bottom: 25px;
     }
 
     .function-section h2 {
-        font-size: 1.1em;
-        margin-bottom: 15px;
+        font-size: 1.5em;
+        margin-bottom: 18px;
+    }
+
+    .slider-group {
+        flex-direction: column; /* Stack sliders vertically on tablets */
+        gap: 15px;
+        align-items: stretch; /* Stretch to fill available width */
+    }
+
+    .slider-container {
+        flex: 1 1 100%; /* Take full width */
+        max-width: 100%; /* Ensure it doesn't overflow */
+        flex-direction: row; /* Keep content in a row within the container */
+        justify-content: space-between;
+        padding: 15px 20px;
+        min-width: unset; /* Remove min-width constraint */
+    }
+
+    .slider-container span {
+        text-align: left; /* Align label to left */
+        min-width: 80px; /* Allow label to be smaller */
+        flex-shrink: 0; /* Prevent shrinking too much */
+    }
+
+    .k-slider,
+    .limit-slider {
+        flex-grow: 1;
+        margin-left: 10px; /* Add some space from the label */
     }
 
     .ggb-element {
@@ -224,6 +438,182 @@
     }
 
     .integral-result {
+        font-size: 1.1em;
+        padding: 10px;
+    }
+}
+
+/* Small screens (most mobile phones) */
+@media (max-width: 768px) {
+    .header {
+        padding: 10px 15px;
+        font-size: 1.4em;
+    }
+
+    .logo-header {
+        font-size: 1.3em;
+    }
+
+    .nav-link {
+        font-size: 0.75em;
+        padding: 5px 10px;
+    }
+
+    .contenedor {
+        width: 98%;
+        margin: 10px auto 20px auto;
+        padding: 10px;
+    }
+
+    .contenedor h1 {
+        font-size: 1.8em;
+        margin-bottom: 25px;
+        padding-bottom: 10px;
+    }
+
+    .function-section {
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+
+    .function-section h2 {
+        font-size: 1.3em;
+        margin-bottom: 15px;
+    }
+
+    .function-section h2 .mjx-chtml {
+        font-size: 0.8em;
+        margin-left: 5px;
+    }
+
+    .slider-group {
+        gap: 10px;
+    }
+
+    .slider-container {
+        flex-direction: column; /* Stack label and slider vertically */
+        align-items: flex-start;
+        gap: 8px;
+        padding: 10px 15px;
+    }
+
+    .slider-container span {
+        width: 100%;
+        text-align: left;
+        min-width: unset;
+    }
+
+    .k-slider,
+    .limit-slider {
+        width: 100%;
+        margin-left: 0; /* Remove left margin when stacked */
+        height: 8px; /* Thinner slider track */
+    }
+
+    .k-slider::-webkit-slider-thumb,
+    .limit-slider::-webkit-slider-thumb {
+        width: 22px;
+        height: 22px;
+        border: 2px solid var(--color-fondo-principal);
+    }
+    .k-slider::-moz-range-thumb,
+    .limit-slider::-moz-range-thumb {
+        width: 22px;
+        height: 22px;
+        border: 2px solid var(--color-fondo-principal);
+    }
+
+    .ggb-element {
+        margin-top: 10px;
+    }
+
+    .integral-result {
         font-size: 1em;
+        padding: 8px;
+        margin-top: 15px;
+    }
+}
+
+/* Extra small screens (e.g., iPhone 5/SE, older Android devices) */
+@media (max-width: 480px) {
+    .header {
+        padding: 8px 10px;
+        font-size: 1.2em;
+    }
+
+    .logo-header {
+        font-size: 1.1em;
+    }
+
+    .nav-link {
+        font-size: 0.7em;
+        padding: 4px 8px;
+    }
+
+    .contenedor {
+        padding: 8px;
+        margin: 5px auto 15px auto;
+    }
+
+    .contenedor h1 {
+        font-size: 1.5em;
+        margin-bottom: 20px;
+        padding-bottom: 8px;
+    }
+
+    .function-section {
+        padding: 10px;
+        margin-bottom: 15px;
+    }
+
+    .function-section h2 {
+        font-size: 1.1em;
+        margin-bottom: 10px;
+    }
+
+    .function-section h2 .mjx-chtml {
+        font-size: 0.75em;
+        margin-left: 3px;
+    }
+
+    .slider-group {
+        gap: 8px;
+    }
+
+    .slider-container {
+        padding: 8px 10px;
+    }
+
+    .slider-container span {
+        font-size: 0.9em;
+    }
+
+    .k-slider,
+    .limit-slider {
+        height: 6px; /* Even thinner track */
+    }
+
+    .k-slider::-webkit-slider-thumb,
+    .limit-slider::-webkit-slider-thumb {
+        width: 18px;
+        height: 18px;
+        border: 1px solid var(--color-fondo-principal);
+    }
+    .k-slider::-moz-range-thumb,
+    .limit-slider::-moz-range-thumb {
+        width: 18px;
+        height: 18px;
+        border: 1px solid var(--color-fondo-principal);
+    }
+
+    .integral-result {
+        font-size: 0.9em;
+        padding: 6px;
+        margin-top: 10px;
+    }
+
+    .footer {
+        padding: 10px 0;
+        font-size: 0.8em;
     }
 }

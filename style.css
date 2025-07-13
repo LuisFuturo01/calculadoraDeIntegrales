@@ -17,30 +17,37 @@
     --color-borde-oscuro: #20232a;
     --color-sombra: rgba(0, 0, 0, 0.5);
     --transicion-suave: all 0.3s ease-in-out;
+    /* Define header and footer heights as CSS variables */
+    --header-height: 70px;
+    --footer-height: 60px; /* Adjusted slightly for padding */
 }
 
 body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
-    padding: 80px 0 60px 0;
+    /* Use padding-top and padding-bottom to account for fixed header/footer */
+    padding-top: var(--header-height);
+    padding-bottom: var(--footer-height);
     background-color: var(--color-fondo-principal);
     color: var(--color-texto-principal);
     line-height: 1.6;
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
+    flex-direction: column; /* Changed to column to stack content */
+    justify-content: flex-start;
+    align-items: center; /* Center content horizontally */
     min-height: 100vh;
 }
 
 .contenedor {
     max-width: 950px;
     width: 95%;
-    margin: auto;
+    margin: 20px auto; /* Add vertical margin to prevent content from touching header/footer */
     background-color: var(--color-fondo-seccion);
     padding: 35px;
     border-radius: 12px;
     box-shadow: 0 8px 30px var(--color-sombra);
     border: 1px solid var(--color-borde-claro);
+    flex-grow: 1; /* Allow the container to grow and fill available space */
 }
 
 .header,
@@ -68,7 +75,7 @@ body {
     font-weight: 700;
     text-shadow: 0 0 5px rgba(255, 193, 7, 0.8);
     padding: 0 30px;
-    height: 70px;
+    height: var(--header-height); /* Use variable for height */
 }
 
 .logo-header {
@@ -110,6 +117,7 @@ body {
     font-size: 0.9em;
     color: var(--color-texto-secundario);
     padding: 10px 20px;
+    height: var(--footer-height); /* Use variable for height */
 }
 
 h1 {
@@ -123,9 +131,10 @@ h1 {
     padding-bottom: 15px;
     text-shadow: none;
 }
-
+.errorPrev{
+    color: var(--color-resaltado-secundario); font-size: 0.9em;
+}
 h2 {
-    font-family: 'Montserrat', sans-serif;
     color: var(--color-resaltado-primario);
     border-bottom: 1px solid var(--color-borde-claro);
     padding-bottom: 10px;
@@ -133,7 +142,6 @@ h2 {
     margin-bottom: 20px;
     font-size: 1.5em;
     text-transform: uppercase;
-    letter-spacing: 0.8px;
 }
 
 h3 {
@@ -457,22 +465,32 @@ button:active {
     box-shadow: 0 0 5px rgba(97, 218, 251, 0.6);
 }
 
-
+/* Media Queries for Responsiveness */
 @media (max-width: 768px) {
+    /* Adjust header and footer heights for smaller screens */
+    :root {
+        --header-height: 100px; /* Increased height for stacked header */
+        --footer-height: 50px;
+    }
+
     body {
-        padding: 70px 0 50px 0;
+        padding-top: var(--header-height);
+        padding-bottom: var(--footer-height);
     }
 
     .header {
         flex-direction: column;
         font-size: 1.1em;
         padding: 0 10px;
-        height: auto;
+        height: auto; /* Allow height to adjust based on content */
+        justify-content: center; /* Center content vertically */
     }
 
     .nav-header {
         gap: 10px;
         margin-top: 5px;
+        flex-wrap: wrap; /* Allow navigation links to wrap */
+        justify-content: center; /* Center navigation links */
     }
 
     .footer {
@@ -540,8 +558,15 @@ button:active {
 }
 
 @media (max-width: 480px) {
+    /* Further adjustments for very small screens */
+    :root {
+        --header-height: 90px; /* Slightly reduce header height for very small screens */
+        --footer-height: 45px;
+    }
+
     .contenedor {
         padding: 15px;
+        margin: 10px auto; /* Reduce vertical margin */
     }
 
     h1 {
