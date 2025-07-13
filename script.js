@@ -266,6 +266,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 integralDefinidaLatex.innerHTML = `\\(\\int_{${datos.latex_limite_inferior}}^{${datos.latex_limite_superior}} ${datos.latex_funcion_original}\\, d${datos.latex_variable} = ${datos.latex_integral_definida}\\)`;
                 if (datos.valor_numerico_definida) {
                     valorIntegralDefinida.innerHTML = `Valor numérico: <strong>${datos.valor_numerico_definida}</strong>`;
+                    if(datos.valor_numerico_definida === "No numérico / Complejo"){
+                        document.getElementById('seccionGeoGebra').style.display = 'none'; // Oculta GeoGebra si el valor no es numérico
+                    }else{
+                        document.getElementById('seccionGeoGebra').style.display = 'block'; // Asegura que GeoGebra se muestre si el valor es numérico
+                    }
                 } else {
                     valorIntegralDefinida.innerHTML = `<em>El valor numérico no pudo ser determinado (podría ser infinito, no real o no evaluable).</em>`;
                 }
