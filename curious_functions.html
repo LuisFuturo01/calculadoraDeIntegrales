@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funciones Curiosas - UMSA</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="curious_functions.css">
+    <script src="https://www.geogebra.org/apps/deployggb.js"></script>
+</head>
+<body id="body">
+
+    <header class="header">
+        <span class="logo-header">Calculadora de Integrales</span>
+        <nav class="nav-header">
+            <a href="index.html" class="nav-link">Inicio</a>
+            <a href="estadistica.html" class="nav-link">Estadística de Estudiantes</a>
+            <a href="form.html" class="nav-link">Formulario de Notas</a>
+            <a href="curious_functions.html" class="nav-link">Funciones extra</a>
+        </nav>
+    </header>
+
+    <div class="contenedor">
+        <h1>Explorador de Funciones Curiosas</h1>
+
+        <p class="intro-text">
+            Aquí puedes explorar cómo diferentes funciones cambian al modificar una constante 'k'
+            y **visualizar su integral definida** entre los límites del eje X.
+        </p>
+
+        <section class="function-section">
+            <h2>1. Parábola con Vértice Ajustable: $f(x) = (x - k)^2$</h2>
+            <div class="slider-group">
+                <div class="slider-container">
+                    <span>Valor de k: <span id="kValue1">0.0</span></span>
+                    <input type="range" min="-5" max="5" value="0" step="0.1" class="k-slider" data-ggb-id="ggbApplet1" data-param-type="k">
+                </div>
+                <div class="slider-container limit-slider">
+                    <span>Límite Inf. (X): <span id="xMinValue1"></span></span>
+                    <input type="range" id="xMinSlider1" min="-10" max="10" value="0" step="0.01" class="limit-slider x-min-slider" data-ggb-id="ggbApplet1" data-param-type="xMin">
+                </div>
+                <div class="slider-container limit-slider">
+                    <span>Límite Sup. (X): <span id="xMaxValue1"></span></span>
+                    <input type="range" id="xMaxSlider1" min="-10" max="10" value="0" step="0.01" class="limit-slider x-max-slider" data-ggb-id="ggbApplet1" data-param-type="xMax">
+                </div>
+            </div>
+            <div class="ggb-element" id="ggbApplet1"></div>
+            <div class="integral-result" id="integralResult1">Integral: Calculando...</div>
+        </section>
+
+        <section class="function-section">
+            <h2>2. Onda Senoidal (Frecuencia): $f(x) = \sin(kx)$</h2>
+            <div class="slider-group">
+                <div class="slider-container">
+                    <span>Valor de k: <span id="kValue2">1.0</span></span>
+                    <input type="range" min="0.1" max="5" value="1" step="0.1" class="k-slider" data-ggb-id="ggbApplet2" data-param-type="k">
+                </div>
+                <div class="slider-container limit-slider">
+                    <span>Límite Inf. (X): <span id="xMinValue2"></span></span>
+                    <input type="range" id="xMinSlider2" min="-10" max="10" value="0" step="0.01" class="limit-slider x-min-slider" data-ggb-id="ggbApplet2" data-param-type="xMin">
+                </div>
+                <div class="slider-container limit-slider">
+                    <span>Límite Sup. (X): <span id="xMaxValue2"></span></span>
+                    <input type="range" id="xMaxSlider2" min="-10" max="10" value="0" step="0.01" class="limit-slider x-max-slider" data-ggb-id="ggbApplet2" data-param-type="xMax">
+                </div>
+            </div>
+            <div class="ggb-element" id="ggbApplet2"></div>
+            <div class="integral-result" id="integralResult2">Integral: Calculando...</div>
+        </section>
+
+        <section class="function-section">
+            <h2>3. Función Exponencial: $f(x) = e^{kx}$</h2>
+            <div class="slider-group">
+                <div class="slider-container">
+                    <span>Valor de k: <span id="kValue3">0.5</span></span>
+                    <input type="range" min="-2" max="2" value="0.5" step="0.1" class="k-slider" data-ggb-id="ggbApplet3" data-param-type="k">
+                </div>
+                <div class="slider-container limit-slider">
+                    <span>Límite Inf. (X): <span id="xMinValue3"></span></span>
+                    <input type="range" id="xMinSlider3" min="-10" max="10" value="0" step="0.01" class="limit-slider x-min-slider" data-ggb-id="ggbApplet3" data-param-type="xMin">
+                </div>
+                <div class="slider-container limit-slider">
+                    <span>Límite Sup. (X): <span id="xMaxValue3"></span></span>
+                    <input type="range" id="xMaxSlider3" min="-10" max="10" value="0" step="0.01" class="limit-slider x-max-slider" data-ggb-id="ggbApplet3" data-param-type="xMax">
+                </div>
+            </div>
+            <div class="ggb-element" id="ggbApplet3"></div>
+            <div class="integral-result" id="integralResult3">Integral: Calculando...</div>
+        </section>
+
+        <section class="function-section">
+            <h2>4. Función Logarítmica Escalada: $f(x) = k \ln(x)$</h2>
+            <div class="slider-group">
+                <div class="slider-container">
+                    <span>Valor de k: <span id="kValue4">1.0</span></span>
+                    <input type="range" min="0.1" max="3" value="1" step="0.1" class="k-slider" data-ggb-id="ggbApplet4" data-param-type="k">
+                </div>
+                <div class="slider-container limit-slider">
+                    <span>Límite Inf. (X): <span id="xMinValue4"></span></span>
+                    <input type="range" id="xMinSlider4" min="-10" max="10" value="0" step="0.01" class="limit-slider x-min-slider" data-ggb-id="ggbApplet4" data-param-type="xMin">
+                </div>
+                <div class="slider-container limit-slider">
+                    <span>Límite Sup. (X): <span id="xMaxValue4"></span></span>
+                    <input type="range" id="xMaxSlider4" min="-10" max="10" value="0" step="0.01" class="limit-slider x-max-slider" data-ggb-id="ggbApplet4" data-param-type="xMax">
+                </div>
+            </div>
+            <div class="ggb-element" id="ggbApplet4"></div>
+            <div class="integral-result" id="integralResult4">Integral: Calculando...</div>
+        </section>
+
+        <section class="function-section">
+            <h2>5. Hipérbola Ajustable: $f(x) = k/x$</h2>
+            <div class="slider-group">
+                <div class="slider-container">
+                    <span>Valor de k: <span id="kValue5">1.0</span></span>
+                    <input type="range" min="-5" max="5" value="1" step="0.1" class="k-slider" data-ggb-id="ggbApplet5" data-param-type="k">
+                </div>
+                <div class="slider-container limit-slider">
+                    <span>Límite Inf. (X): <span id="xMinValue5"></span></span>
+                    <input type="range" id="xMinSlider5" min="-10" max="10" value="0" step="0.01" class="limit-slider x-min-slider" data-ggb-id="ggbApplet5" data-param-type="xMin">
+                </div>
+                <div class="slider-container limit-slider">
+                    <span>Límite Sup. (X): <span id="xMaxValue5"></span></span>
+                    <input type="range" id="xMaxSlider5" min="-10" max="10" value="0" step="0.01" class="limit-slider x-max-slider" data-ggb-id="ggbApplet5" data-param-type="xMax">
+                </div>
+            </div>
+            <div class="ggb-element" id="ggbApplet5"></div>
+            <div class="integral-result" id="integralResult5">Integral: Calculando...</div>
+        </section>
+
+        <section class="function-section">
+            <h2>6. Racional con Asíntota Móvil: $f(x) = 1/(x - k)$</h2>
+            <div class="slider-group">
+                <div class="slider-container">
+                    <span>Valor de k: <span id="kValue6">0.0</span></span>
+                    <input type="range" min="-5" max="5" value="0" step="0.1" class="k-slider" data-ggb-id="ggbApplet6" data-param-type="k">
+                </div>
+                <div class="slider-container limit-slider">
+                    <span>Límite Inf. (X): <span id="xMinValue6"></span></span>
+                    <input type="range" id="xMinSlider6" min="-10" max="10" value="0" step="0.01" class="limit-slider x-min-slider" data-ggb-id="ggbApplet6" data-param-type="xMin">
+                </div>
+                <div class="slider-container limit-slider">
+                    <span>Límite Sup. (X): <span id="xMaxValue6"></span></span>
+                    <input type="range" id="xMaxSlider6" min="-10" max="10" value="0" step="0.01" class="limit-slider x-max-slider" data-ggb-id="ggbApplet6" data-param-type="xMax">
+                </div>
+            </div>
+            <div class="ggb-element" id="ggbApplet6"></div>
+            <div class="integral-result" id="integralResult6">Integral: Calculando...</div>
+        </section>
+
+        <section class="function-section">
+            <h2>7. Función de Potencia: $f(x) = x^k$</h2>
+            <div class="slider-group">
+                <div class="slider-container">
+                    <span>Valor de k: <span id="kValue7">2.0</span></span>
+                    <input type="range" id="kSlider7" min="0.1" max="4" value="2" step="0.1" class="k-slider" data-ggb-id="ggbApplet7" data-param-type="k">
+                </div>
+                <div class="slider-container limit-slider">
+                    <span>Límite Inf. (X): <span id="xMinValue7"></span></span>
+                    <input type="range" id="xMinSlider7" min="-10" max="10" value="0" step="0.01" class="limit-slider x-min-slider" data-ggb-id="ggbApplet7" data-param-type="xMin">
+                </div>
+                <div class="slider-container limit-slider">
+                    <span>Límite Sup. (X): <span id="xMaxValue7"></span></span>
+                    <input type="range" id="xMaxSlider7" min="-10" max="10" value="0" step="0.01" class="limit-slider x-max-slider" data-ggb-id="ggbApplet7" data-param-type="xMax">
+                </div>
+            </div>
+            <div class="ggb-element" id="ggbApplet7"></div>
+            <div class="integral-result" id="integralResult7">Integral: Calculando...</div>
+        </section>
+
+        <section class="function-section">
+            <h2>8. Onda Amortiguada: $f(x) = e^{-kx} \sin(x)$</h2>
+            <div class="slider-group">
+                <div class="slider-container">
+                    <span>Valor de k: <span id="kValue8">0.1</span></span>
+                    <input type="range" min="0.01" max="1" value="0.1" step="0.01" class="k-slider" data-ggb-id="ggbApplet8" data-param-type="k">
+                </div>
+                <div class="slider-container limit-slider">
+                    <span>Límite Inf. (X): <span id="xMinValue8"></span></span>
+                    <input type="range" id="xMinSlider8" min="-10" max="10" value="0" step="0.01" class="limit-slider x-min-slider" data-ggb-id="ggbApplet8" data-param-type="xMin">
+                </div>
+                <div class="slider-container limit-slider">
+                    <span>Límite Sup. (X): <span id="xMaxValue8"></span></span>
+                    <input type="range" id="xMaxSlider8" min="-10" max="10" value="0" step="0.01" class="limit-slider x-max-slider" data-ggb-id="ggbApplet8" data-param-type="xMax">
+                </div>
+            </div>
+            <div class="ggb-element" id="ggbApplet8"></div>
+            <div class="integral-result" id="integralResult8">Integral: Calculando...</div>
+        </section>
+
+        <section class="function-section">
+            <h2>9. Cúbica con Inflexión: $f(x) = x^3 - kx$</h2>
+            <div class="slider-group">
+                <div class="slider-container">
+                    <span>Valor de k: <span id="kValue9">1.0</span></span>
+                    <input type="range" min="0" max="5" value="1" step="0.1" class="k-slider" data-ggb-id="ggbApplet9" data-param-type="k">
+                </div>
+                <div class="slider-container limit-slider">
+                    <span>Límite Inf. (X): <span id="xMinValue9"></span></span>
+                    <input type="range" id="xMinSlider9" min="-10" max="10" value="0" step="0.01" class="limit-slider x-min-slider" data-ggb-id="ggbApplet9" data-param-type="xMin">
+                </div>
+                <div class="slider-container limit-slider">
+                    <span>Límite Sup. (X): <span id="xMaxValue9"></span></span>
+                    <input type="range" id="xMaxSlider9" min="-10" max="10" value="0" step="0.01" class="limit-slider x-max-slider" data-ggb-id="ggbApplet9" data-param-type="xMax">
+                </div>
+            </div>
+            <div class="ggb-element" id="ggbApplet9"></div>
+            <div class="integral-result" id="integralResult9">Integral: Calculando...</div>
+        </section>
+
+        <section class="function-section">
+            <h2>10. Valor Absoluto (Pendiente): $f(x) = k|x|$</h2>
+            <div class="slider-group">
+                <div class="slider-container">
+                    <span>Valor de k: <span id="kValue10">1.0</span></span>
+                    <input type="range" min="0.1" max="5" value="1" step="0.1" class="k-slider" data-ggb-id="ggbApplet10" data-param-type="k">
+                </div>
+                <div class="slider-container limit-slider">
+                    <span>Límite Inf. (X): <span id="xMinValue10"></span></span>
+                    <input type="range" id="xMinSlider10" min="-10" max="10" value="0" step="0.01" class="limit-slider x-min-slider" data-ggb-id="ggbApplet10" data-param-type="xMin">
+                </div>
+                <div class="slider-container limit-slider">
+                    <span>Límite Sup. (X): <span id="xMaxValue10"></span></span>
+                    <input type="range" id="xMaxSlider10" min="-10" max="10" value="0" step="0.01" class="limit-slider x-max-slider" data-ggb-id="ggbApplet10" data-param-type="xMax">
+                </div>
+            </div>
+            <div class="ggb-element" id="ggbApplet10"></div>
+            <div class="integral-result" id="integralResult10">Integral: Calculando...</div>
+        </section>
+
+    </div>
+
+    <footer class="footer">
+        © 2025 Facultad FCPN - UMSA
+    </footer>
+
+    <script src="curious_functions.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</body>
+</html>

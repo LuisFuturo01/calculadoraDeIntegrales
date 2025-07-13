@@ -74,12 +74,17 @@ x*exp(-x**2)
 calculadoraDeIntegrales/
 ├── app.py                 # Servidor Flask con endpoints
 ├── index.html            # Página principal de la calculadora
-├── estadistica.html      # Página de estadísticas estudiantiles
+├── style.css            # Estilos CSS con tema oscuro
 ├── script.js             # Lógica principal de la calculadora
 ├── interactions.js       # Interacciones de usuario y ayuda
+├── estadistica.html      # Página de estadísticas estudiantiles
+├── estadistica.css      # Página de estadísticas estudiantiles
 ├── estadistica.js        # Lógica de gráficos estadísticos
-├── style.css            # Estilos CSS con tema oscuro
 ├── requirements.txt     # Dependencias Python
+├── form.html        # Sitio donde se agrega los datos de los estudiantes
+├── form.css        # Estilos del formulario, tematica dark
+├── form.js        # Conexion a firebase, y envio de información, logica general
+├── form.css        # Conexion a firebase, y envio de información, logica general
 ├── README.md           # Este archivo
 └── .gitignore          # Archivos a ignorar en Git
 ```
@@ -96,6 +101,7 @@ calculadoraDeIntegrales/
 - **MathJax 3**: Renderizado de ecuaciones matemáticas en LaTeX
 - **GeoGebra**: Visualizaciones gráficas interactivas
 - **Chart.js**: Gráficos estadísticos
+- **FIrebase**: Base de datos no SQL para los datos estadistivos
 
 ## 🎯 Funcionalidades Principales
 

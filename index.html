@@ -9,12 +9,14 @@
     <script src="https://www.geogebra.org/apps/deployggb.js"></script>
 </head>
 <body id="body">
+    
     <header class="header">
         <span class="logo-header">Calculadora de Integrales</span>
         <nav class="nav-header">
             <a href="index.html" class="nav-link active">Inicio</a>
             <a href="estadistica.html" class="nav-link">Estadística de Estudiantes</a>
             <a href="form.html" class="nav-link">Formulario de Notas</a>
+            <a href="curious_functions.html" class="nav-link">Funciones extra</a>
         </nav>
     </header>
 
@@ -29,24 +31,24 @@
             <h2>Función</h2>
             <label for="inputFuncion">Función (ej: `x**2`, `exp(x)`, `sin(x)/x`):</label>
             <div class="input_help">
-                <input type="text" id="inputFuncion" value="x**2 + exp(x)">
+                <input type="text" id="inputFuncion" value="x**2 + exp(x)" required>
                 <button class="input_help_button" id="help_button">❔</button>                
             </div>
             <p class="previsualizacion-entrada" id="previsualizacionFuncion"></p>
 
-            <h2>Límites (opcional)</h2>
+            <h2>Límites </h2>
             <div class="rejilla-limites">
                 <div>
                     <label for="inputVariable">Variable:</label>
-                    <input type="text" id="inputVariable" value="x">
+                    <input type="text" id="inputVariable" value="x" required>
                 </div>
                 <div>
-                    <label for="inputLimiteInferior">Inferior (número, `inf`, `-inf`):</label>
-                    <input type="text" id="inputLimiteInferior" value="0">
+                    <label for="inputLimiteInferior">Inferior (número, `inf ó oo`, `-inf ó -oo`):</label>
+                    <input type="text" id="inputLimiteInferior" value="0" required>
                 </div>
                 <div>
-                    <label for="inputLimiteSuperior">Superior (número, `inf`, `-inf`):</label>
-                    <input type="text" id="inputLimiteSuperior" value="1">
+                    <label for="inputLimiteSuperior">Superior (número, `inf ó oo`, `-inf ó -oo`):</label>
+                    <input type="text" id="inputLimiteSuperior" value="1" required>
                 </div>
             </div>
             
@@ -58,7 +60,7 @@
             <button id="botonCalcular">Calcular</button>
         </section>
 
-        <section class="seccion-resultados">
+        <section class="seccion-resultados" id="seccionResultados" style="display: none;">
             <h2>Resultados</h2>
             <h3>Función Original:</h3>
             <p id="funcionOriginalLatex" class="salida-latex"></p>
@@ -71,12 +73,19 @@
             <p id="valorIntegralDefinida" class="salida-valor"></p>
         </section>
 
-        <section class="seccion-geogebra">
+        <section class="seccion-geogebra" id="seccionGeoGebra" style="display: none;">
             <h2>Gráfica con GeoGebra</h2>
+
+            <div class="desA_container">
+                <span>deslizador A</span>
+                <input style="position: relative; z-index: 1000;" type="range" id="deslizadorA">
+            </div>
+            <div class="desA_container">
+                <span>deslizador B</span>
+                <input style="position: relative; z-index: 1000;" type="range" id="deslizadorB">
+            </div>
             <div id="elementoGgb"></div>
-            <p class="nota-geogebra">
-                <small>GeoGebra usa 'x'. La gráfica de la integral definida solo es posible con límites numéricos.</small>
-            </p>
+            
         </section>
     </div>
 
