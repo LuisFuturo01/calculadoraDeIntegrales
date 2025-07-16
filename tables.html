@@ -9,28 +9,53 @@
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js"></script>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="tables.css"> 
+    <link rel="stylesheet" href="tables.css">
 </head>
 <body id="body">
     <header class="header">
         <span class="logo-header">Calculadora de Integrales</span>
         <nav class="nav-header">
             <a href="index.html" class="nav-link">Inicio</a>
-            <a href="estadistica.html" class="nav-link">Estadística de Estudiantes</a>
+            <a href="tables.html" class="nav-link active">Estadística de Estudiantes</a>
             <a href="form.html" class="nav-link">Formulario de Notas</a>
             <a href="curious_functions.html" class="nav-link">Funciones extra</a>
-            <a href="tables.html" class="nav-link active">Tablas</a>
         </nav>
     </header>
 
-    <main class="contenedor"> <h1>Análisis de Rendimiento Académico</h1>
+    <main class="contenedor">
+        <h1>Análisis de Rendimiento Académico</h1>
 
-        <section class="seccion-resultados table-section"> <h2>Resultados del Primer Examen</h2>
+        <section class="statistics-summary">
+            <h2>Resumen General</h2>
+            <div class="summary-grid">
+                <div>
+                    <h3>Primer Examen</h3>
+                    <p>Total Evaluados: <span id="totalExamen1">0</span></p>
+                    <p>Aprobados: <span id="aprobadosExamen1">0</span></p>
+                    <p>Reprobados: <span id="reprobadosExamen1">0</span></p>
+                </div>
+                <div>
+                    <h3>Segundo Examen</h3>
+                    <p>Total Evaluados: <span id="totalExamen2">0</span></p>
+                    <p>Aprobados: <span id="aprobadosExamen2">0</span></p>
+                    <p>Reprobados: <span id="reprobadosExamen2">0</span></p>
+                </div>
+                <div>
+                    <h3>General</h3>
+                    <p>Total Estudiantes con Datos en al menos 1 examen: <span id="totalEstudiantesGeneral">0</span></p>
+                    <p>Promedio General de Notas (Examen 1 y 2): <span id="promedioGeneral">N/A</span></p>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="seccion-resultados table-section">
+            <h2>Resultados del Primer Examen</h2>
             <div class="table-responsive">
                 <table>
                     <thead>
                         <tr>
-                            <th>Código Estudiante</th>
+                            <th>N°</th> <th>Código Estudiante</th>
                             <th>Nota</th>
                             <th>Asistencia</th>
                             <th>Hrs. Estudio</th>
@@ -51,7 +76,7 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>Código Estudiante</th>
+                            <th>N°</th> <th>Código Estudiante</th>
                             <th>Nota</th>
                             <th>Asistencia</th>
                             <th>Hrs. Estudio</th>
@@ -73,7 +98,7 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>Código Estudiante</th>
+                            <th>N°</th> <th>Código Estudiante</th>
                             <th>Nota Examen 1</th>
                             <th>Asistencia Examen 1</th>
                             <th>Hrs. Estudio Examen 1</th>
@@ -99,5 +124,5 @@
     </footer>
 
     <script type="module" src="tables.js"></script>
-    </body>
+</body>
 </html>

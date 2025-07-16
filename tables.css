@@ -38,6 +38,16 @@ table th, table td {
     color: var(--color-texto-principal); /* Asegura que el texto sea claro */
 }
 
+/* Estilo para la columna de numeración */
+table th:first-child,
+table td:first-child {
+    width: 50px; /* Ancho fijo para el número */
+    text-align: center;
+    font-weight: bold;
+    background-color: rgba(97, 218, 251, 0.05); /* Un ligero fondo para la numeración */
+}
+
+
 table th {
     background-color: var(--color-resaltado-primario); /* Usando variable de style.css */
     color: var(--color-fondo-principal); /* Usando variable de style.css */
@@ -72,11 +82,81 @@ table tbody tr:hover {
     font-size: 1.1em;
 }
 
+/* Estilos para la nueva sección de resumen de estadísticas */
+.statistics-summary {
+    background-color: var(--color-fondo-seccion); /* Fondo de sección similar a .contenedor */
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px var(--color-sombra);
+    border: 1px solid var(--color-borde-claro);
+    margin-bottom: 40px; /* Espacio entre el resumen y la primera tabla */
+}
+
+.statistics-summary h2 {
+    text-align: center;
+    color: var(--color-resaltado-secundario); /* Título principal del resumen */
+    margin-bottom: 25px;
+    border-bottom: 2px solid var(--color-resaltado-primario);
+    padding-bottom: 10px;
+    font-size: 1.8em;
+}
+
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* 3 columnas adaptables */
+    gap: 25px;
+    margin-top: 20px;
+}
+
+.summary-grid > div {
+    background-color: var(--color-borde-oscuro);
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid var(--color-borde-claro);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+.summary-grid h3 {
+    color: var(--color-resaltado-primario);
+    font-size: 1.3em;
+    margin-bottom: 15px;
+    border-bottom: 1px dashed var(--color-borde-claro);
+    padding-bottom: 8px;
+}
+
+.summary-grid p {
+    color: var(--color-texto-principal);
+    font-size: 1.05em;
+    margin-bottom: 8px;
+}
+
+.summary-grid span {
+    font-weight: 700;
+    color: var(--color-resaltado-secundario);
+}
+
 /* Media Queries para responsividad - las tablas se adaptarán a los estilos generales
    del contenedor y de los textos. Solo ajustamos lo específico de las tablas. */
 @media (max-width: 768px) {
     table th, table td {
         padding: 10px;
         font-size: 0.85em;
+    }
+    /* Asegura que el número de columna sea visible y no se rompa el layout */
+    table th:first-child,
+    table td:first-child {
+        width: 40px;
+    }
+
+    .summary-grid {
+        grid-template-columns: 1fr; /* Una columna en pantallas pequeñas */
+    }
+
+    .statistics-summary h2 {
+        font-size: 1.5em;
+    }
+    .summary-grid h3 {
+        font-size: 1.1em;
     }
 }
