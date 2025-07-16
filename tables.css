@@ -1,0 +1,82 @@
+/* Este CSS ahora complementa style.css.
+   style.css define las variables CSS y el diseño base.
+   Aquí solo definimos los estilos específicos para las tablas
+   y los overrides necesarios para mantener la estética de las tablas.
+*/
+
+/* Secciones de Tabla: Usamos 'seccion-resultados' de style.css y agregamos 'table-section' */
+.table-section {
+    margin-bottom: 40px; /* Espacio entre secciones de tabla */
+    padding-top: 20px; /* Espacio para el título h2 */
+    border-top: 1px solid var(--color-borde-claro); /* Separador visual, usando variable de style.css */
+}
+
+.table-section:first-of-type {
+    border-top: none; /* No hay separador para la primera sección */
+    padding-top: 0;
+}
+
+/* Tablas */
+.table-responsive {
+    overflow-x: auto; /* Permite desplazamiento horizontal en pantallas pequeñas */
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    background-color: var(--color-borde-oscuro); /* Usando variable de style.css */
+    border-radius: 8px;
+    overflow: hidden; /* Para bordes redondeados */
+}
+
+table th, table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid var(--color-borde-claro); /* Usando variable de style.css */
+    color: var(--color-texto-principal); /* Asegura que el texto sea claro */
+}
+
+table th {
+    background-color: var(--color-resaltado-primario); /* Usando variable de style.css */
+    color: var(--color-fondo-principal); /* Usando variable de style.css */
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.9em;
+}
+
+table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+table tbody tr:hover {
+    background-color: #444952; /* Un color de hover ligeramente diferente */
+}
+
+.estado-aprobado {
+    color: #4CAF50; /* Verde, puedes definir una variable si lo usas mucho */
+    font-weight: 600;
+}
+
+.estado-reprobado {
+    color: #E91E63; /* Rojo, puedes definir una variable si lo usas mucho */
+    font-weight: 600;
+}
+
+.no-data {
+    text-align: center;
+    color: var(--color-texto-secundario); /* Usando variable de style.css */
+    padding: 20px;
+    font-style: italic;
+    font-size: 1.1em;
+}
+
+/* Media Queries para responsividad - las tablas se adaptarán a los estilos generales
+   del contenedor y de los textos. Solo ajustamos lo específico de las tablas. */
+@media (max-width: 768px) {
+    table th, table td {
+        padding: 10px;
+        font-size: 0.85em;
+    }
+}

@@ -267,9 +267,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (datos.valor_numerico_definida) {
                     valorIntegralDefinida.innerHTML = `Valor numérico: <strong>${datos.valor_numerico_definida}</strong>`;
                     if(datos.valor_numerico_definida === "No numérico / Complejo"){
-                        document.getElementById('seccionGeoGebra').style.display = 'none'; // Oculta GeoGebra si el valor no es numérico
+                        document.getElementById('seccionGeoGebra').style.display = 'none'; 
                     }else{
-                        document.getElementById('seccionGeoGebra').style.display = 'block'; // Asegura que GeoGebra se muestre si el valor es numérico
+                        document.getElementById('seccionGeoGebra').style.display = 'block';
                     }
                 } else {
                     valorIntegralDefinida.innerHTML = `<em>El valor numérico no pudo ser determinado (podría ser infinito, no real o no evaluable).</em>`;
