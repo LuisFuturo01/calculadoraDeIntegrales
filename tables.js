@@ -1,9 +1,7 @@
-// --- Importaciones de Firebase Firestore ---
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getFirestore, collection, getDocs, query, orderBy, Timestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 document.addEventListener('DOMContentLoaded', async () => {
-    // --- Configuración de Firebase (¡TU CONFIGURACIÓN REAL!) ---
     const firebaseConfig = {
         apiKey: "AIzaSyDpZ1iVlOE07m1vXW71A8rJq6o1-u9zq1g",
         authDomain: "dbcalculadoraint.firebaseapp.com",
@@ -15,15 +13,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         measurementId: "G-9MZYELC460"
     };
 
-    // Inicializa Firebase App y Firestore
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
     console.log("Firebase (Firestore) inicializado correctamente para tables.js.");
 
-    // --- Ruta de la Colección en Firestore ---
     const EXAMS_COLLECTION_PATH = 'EncuestaRendimiento';
 
-    // --- Elementos del DOM de las tablas ---
     const tableExamen1Body = document.getElementById('tableExamen1');
     const noDataExamen1 = document.getElementById('noDataExamen1');
 
@@ -33,7 +28,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     const tableComparativaBody = document.getElementById('tableComparativa');
     const noDataComparativa = document.getElementById('noDataComparativa');
 
-    // --- Elementos del DOM para las estadísticas ---
     const totalExamen1Span = document.getElementById('totalExamen1');
     const aprobadosExamen1Span = document.getElementById('aprobadosExamen1');
     const reprobadosExamen1Span = document.getElementById('reprobadosExamen1');
@@ -45,14 +39,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     const totalEstudiantesGeneralSpan = document.getElementById('totalEstudiantesGeneral');
     const promedioGeneralSpan = document.getElementById('promedioGeneral');
 
-    let allProcessedStudentData = []; // Almacena los datos procesados para el resumen
+    let allProcessedStudentData = [];
 
-    // --- Funciones para poblar tablas ---
-
-    /**
-     * Rellena la tabla del Primer Examen.
-     * @param {Array} data - Array de objetos de examen del primer tipo.
-     */
     const populateTableExamen1 = (data) => {
         if (!tableExamen1Body) {
             console.error("Elemento tbody con ID 'tableExamen1' no encontrado.");
@@ -66,7 +54,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
 
         noDataExamen1.style.display = 'none';
-        data.forEach((item, index) => { // Agregamos 'index' para la enumeración
+        data.forEach((item, index) => {
             const row = tableExamen1Body.insertRow();
             const estado = item.nota >= 51 ? 'Aprobado' : 'Reprobado';
             row.innerHTML = `
@@ -81,10 +69,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     };
 
-    /**
-     * Rellena la tabla del Segundo Examen.
-     * @param {Array} data - Array de objetos de examen del segundo tipo.
-     */
     const populateTableExamen2 = (data) => {
         if (!tableExamen2Body) {
             console.error("Elemento tbody con ID 'tableExamen2' no encontrado.");
@@ -98,7 +82,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
 
         noDataExamen2.style.display = 'none';
-        data.forEach((item, index) => { // Agregamos 'index'
+        data.forEach((item, index) => {
             const row = tableExamen2Body.insertRow();
             const estado = item.nota >= 51 ? 'Aprobado' : 'Reprobado';
             row.innerHTML = `
@@ -114,10 +98,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     };
 
-    /**
-     * Rellena la tabla Comparativa.
-     * @param {Array} data - Array de objetos con datos comparativos.
-     */
     const populateTableComparativa = (data) => {
         if (!tableComparativaBody) {
             console.error("Elemento tbody con ID 'tableComparativa' no encontrado.");
@@ -131,16 +111,14 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
 
         noDataComparativa.style.display = 'none';
-        data.forEach((item, index) => { // Agregamos 'index'
+        data.forEach((item, index) => {
             const row = tableComparativaBody.insertRow();
 
-            // Datos del Examen 1
             const notaEx1 = item.examen1?.nota !== undefined ? item.examen1.nota : 'N/A';
             const asistenciaEx1 = item.examen1?.asistencia !== undefined ? item.examen1.asistencia : 'N/A';
             const hrsEstudioEx1 = item.examen1?.hrsEstudio !== undefined ? item.examen1.hrsEstudio : 'N/A';
             const ejerciciosResEx1 = item.examen1?.ejerciciosRes !== undefined ? item.examen1.ejerciciosRes : 'N/A';
 
-            // Datos del Examen 2
             const notaEx2 = item.examen2?.nota !== undefined ? item.examen2.nota : 'N/A';
             const asistenciaEx2 = item.examen2?.asistencia !== undefined ? item.examen2.asistencia : 'N/A';
             const hrsEstudioEx2 = item.examen2?.hrsEstudio !== undefined ? item.examen2.hrsEstudio : 'N/A';
@@ -148,7 +126,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const usoHerramientaEx2 = item.examen2?.herramienta !== undefined ? (item.examen2.herramienta === 'si' ? 'Sí' : 'No') : 'N/A';
 
             let promedioFinal = 'N/A';
-            let promedioNumerico = null; // Para calcular el promedio general
+            let promedioNumerico = null;
             if (item.examen1?.nota !== undefined && item.examen2?.nota !== undefined) {
                 promedioNumerico = (item.examen1.nota + item.examen2.nota) / 2;
                 promedioFinal = promedioNumerico.toFixed(2);
@@ -176,14 +154,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     };
 
-    /**
-     * Actualiza las estadísticas en el resumen.
-     * @param {Array} dataForExamen1 - Datos del examen 1.
-     * @param {Array} dataForExamen2 - Datos del examen 2.
-     * @param {Array} allStudentsComparativeData - Todos los datos procesados para la comparativa.
-     */
     const updateStatisticsSummary = (dataForExamen1, dataForExamen2, allStudentsComparativeData) => {
-        // Estadísticas para Examen 1
         const totalEx1 = dataForExamen1.length;
         const aprobadosEx1 = dataForExamen1.filter(item => item.nota >= 51).length;
         const reprobadosEx1 = totalEx1 - aprobadosEx1;
@@ -192,7 +163,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         aprobadosExamen1Span.textContent = aprobadosEx1;
         reprobadosExamen1Span.textContent = reprobadosEx1;
 
-        // Estadísticas para Examen 2
         const totalEx2 = dataForExamen2.length;
         const aprobadosEx2 = dataForExamen2.filter(item => item.nota >= 51).length;
         const reprobadosEx2 = totalEx2 - aprobadosEx2;
@@ -201,7 +171,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         aprobadosExamen2Span.textContent = aprobadosEx2;
         reprobadosExamen2Span.textContent = reprobadosEx2;
 
-        // Estadísticas Generales
         totalEstudiantesGeneralSpan.textContent = allStudentsComparativeData.length;
 
         let sumOfPromedios = 0;
@@ -228,9 +197,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     };
 
 
-    // --- Lógica de Carga y Procesamiento de Datos ---
     const loadAndProcessData = async () => {
-        // Mostrar mensajes de carga en todas las tablas
         [noDataExamen1, noDataExamen2, noDataComparativa].forEach(el => {
             if (el) {
                 el.textContent = 'Cargando datos...';
@@ -238,12 +205,10 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         });
 
-        // Limpiar las tablas antes de cargar nuevos datos
         if (tableExamen1Body) tableExamen1Body.innerHTML = '';
         if (tableExamen2Body) tableExamen2Body.innerHTML = '';
         if (tableComparativaBody) tableComparativaBody.innerHTML = '';
 
-        // Resetear estadísticas
         totalExamen1Span.textContent = '0';
         aprobadosExamen1Span.textContent = '0';
         reprobadosExamen1Span.textContent = '0';
@@ -264,11 +229,10 @@ document.addEventListener('DOMContentLoaded', async () => {
                 const data = doc.data();
                 const codigoEstudiante = data.codigoEstudiante;
                 const tipoExamen = data.tipoExamen;
-                // Asegúrate de que `timestamp` sea una fecha válida para la comparación
                 const timestamp = data.timestamp instanceof Timestamp ? data.timestamp.toDate() : (data.timestamp ? new Date(data.timestamp) : new Date(0));
 
                 if (!codigoEstudiante || !tipoExamen || data.notaEx === undefined) {
-                    return; // Saltar documentos incompletos
+                    return;
                 }
 
                 if (!studentDataMap.has(codigoEstudiante)) {
@@ -280,7 +244,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 }
                 const studentEntry = studentDataMap.get(codigoEstudiante);
 
-                // Solo guarda el registro más reciente para cada tipo de examen por estudiante
                 if (tipoExamen === 'primer') {
                     if (!studentEntry.examen1 || timestamp > studentEntry.examen1._timestamp) {
                         studentEntry.examen1 = {
@@ -288,7 +251,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                             asistencia: data.asistencia,
                             hrsEstudio: data.hrsEstudio,
                             ejerciciosRes: data.ejerciciosRes,
-                            _timestamp: timestamp // Guardar timestamp para futuras comparaciones
+                            _timestamp: timestamp
                         };
                     }
                 } else if (tipoExamen === 'segundo') {
@@ -305,37 +268,36 @@ document.addEventListener('DOMContentLoaded', async () => {
                 }
             });
 
-            // Convertir el mapa a un array, filtrando los estudiantes sin ningún examen registrado si es necesario
             allProcessedStudentData = Array.from(studentDataMap.values()).filter(s => s.examen1 || s.examen2);
             console.log("Datos de estudiantes procesados:", allProcessedStudentData);
 
             const dataForExamen1Table = allProcessedStudentData
-                                        .filter(s => s.examen1 !== null)
-                                        .map(s => ({
-                                            codigoEstudiante: s.codigoEstudiante,
-                                            nota: s.examen1.nota,
-                                            asistencia: s.examen1.asistencia,
-                                            hrsEstudio: s.examen1.hrsEstudio,
-                                            ejerciciosRes: s.examen1.ejerciciosRes
-                                        }));
+                                            .filter(s => s.examen1 !== null)
+                                            .map(s => ({
+                                                codigoEstudiante: s.codigoEstudiante,
+                                                nota: s.examen1.nota,
+                                                asistencia: s.examen1.asistencia,
+                                                hrsEstudio: s.examen1.hrsEstudio,
+                                                ejerciciosRes: s.examen1.ejerciciosRes
+                                            }));
 
             const dataForExamen2Table = allProcessedStudentData
-                                        .filter(s => s.examen2 !== null)
-                                        .map(s => ({
-                                            codigoEstudiante: s.codigoEstudiante,
-                                            nota: s.examen2.nota,
-                                            asistencia: s.examen2.asistencia,
-                                            hrsEstudio: s.examen2.hrsEstudio,
-                                            ejerciciosRes: s.examen2.ejerciciosRes,
-                                            herramienta: s.examen2.herramienta
-                                        }));
+                                            .filter(s => s.examen2 !== null)
+                                            .map(s => ({
+                                                codigoEstudiante: s.codigoEstudiante,
+                                                nota: s.examen2.nota,
+                                                asistencia: s.examen2.asistencia,
+                                                herramienta: s.examen2.herramienta,
+                                                hrsEstudio: s.examen2.hrsEstudio,
+                                                ejerciciosRes: s.examen2.ejerciciosRes
+                                            }));
 
             const dataForComparativaTable = allProcessedStudentData;
 
             populateTableExamen1(dataForExamen1Table);
             populateTableExamen2(dataForExamen2Table);
             populateTableComparativa(dataForComparativaTable);
-            updateStatisticsSummary(dataForExamen1Table, dataForExamen2Table, dataForComparativaTable); // Llamar a la función para actualizar el resumen
+            updateStatisticsSummary(dataForExamen1Table, dataForExamen2Table, dataForComparativaTable);
 
         } catch (error) {
             console.error(`Error al cargar datos de Firestore desde '${EXAMS_COLLECTION_PATH}':`, error);
@@ -347,7 +309,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                     el.style.display = 'block';
                 }
             });
-            // También mostrar el error en el resumen si hay un problema general
             [totalExamen1Span, aprobadosExamen1Span, reprobadosExamen1Span,
              totalExamen2Span, aprobadosExamen2Span, reprobadosExamen2Span,
              totalEstudiantesGeneralSpan, promedioGeneralSpan].forEach(el => {
@@ -356,16 +317,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     };
 
-    // --- Lógica de activación de navegación (para el header) ---
     const currentPath = window.location.pathname.split('/').pop();
     const navLinks = document.querySelectorAll('.nav-link');
     navLinks.forEach(link => {
         const linkPath = link.getAttribute('href').split('/').pop();
-        // Si el archivo actual es tables.html, asegúrate de que 'Estadística de Estudiantes' esté activo
         if (currentPath === 'tables.html' && linkPath === 'tables.html') {
             link.classList.add('active');
         } else if (currentPath !== 'tables.html' && linkPath === currentPath) {
-             // Para otros archivos, si el nombre del archivo coincide, actívalo
             link.classList.add('active');
         } else {
             link.classList.remove('active');

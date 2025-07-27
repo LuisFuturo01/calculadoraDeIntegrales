@@ -20,13 +20,12 @@ def previsualizar_funcion():
     datos = request.json
     funcion_texto = datos.get('funcion')
     if not funcion_texto:
-        return jsonify({'latex': ''}) # Devuelve vacío si no hay texto
+        return jsonify({'latex': ''})
     try:
         expresion = parse_expr(funcion_texto, transformations='all')
         latex_expresion = sp.latex(expresion)
         return jsonify({'latex': latex_expresion})
     except Exception as e:
-        # Si hay un error de sintaxis, devuelve el error para mostrarlo al usuario
         return jsonify({'error': "Sintaxis inválida. Ej: 'x**2', 'sin(x)', 'exp(x)'"}), 400
 
 
@@ -51,7 +50,6 @@ def calcular_integral():
         latex_limite_inferior = None
         latex_limite_superior = None
 
-        # Convertir límites a SymPy.oo si son 'inf' o '-inf'
         limite_inferior_obj = None
         if limite_inferior_texto.lower() in ['inf', 'oo']:
             limite_inferior_obj = sp.oo
@@ -78,7 +76,6 @@ def calcular_integral():
             integral_definida_valor = sp.integrate(expresion, (variable, limite_inferior_obj, limite_superior_obj))
             integral_definida_latex = sp.latex(integral_definida_valor)
 
-            # Evaluar numéricamente solo si es un número real y no infinito
             if integral_definida_valor.is_real == True and integral_definida_valor not in [sp.oo, -sp.oo]:
                 try:
                     valor_numerico_definida = str(integral_definida_valor.evalf(num_decimales))

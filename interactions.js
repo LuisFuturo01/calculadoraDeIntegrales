@@ -10,11 +10,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 100);
     }
 
-    const inputs = document.querySelectorAll('input[type="text"], input[type="number"]'); // Incluye input type number
+    const inputs = document.querySelectorAll('input[type="text"], input[type="number"]');
     inputs.forEach(input => {
         input.addEventListener('focus', () => {
             input.style.transition = 'box-shadow 0.3s ease';
-            input.style.boxShadow = '0 0 0 4px rgba(97, 218, 251, 0.5)'; // Color de enfoque
+            input.style.boxShadow = '0 0 0 4px rgba(97, 218, 251, 0.5)';
         });
         input.addEventListener('blur', () => {
             input.style.boxShadow = 'none';
@@ -22,13 +22,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-//modal
 const helpButton = document.getElementById("help_button");
 const helpModal = document.getElementById("help_modal");
 const modalContent = document.getElementById("modalContent");
 const closeSpan = helpModal.querySelector("span");
 
-// Lista de ayudas (puedes agregar más)
 const helpItems = [
     { palabra: "x**2", descripcion: "Potencia: x al cuadrado." },
     { palabra: "x**n", descripcion: "x elevado a la potencia n." },
@@ -78,7 +76,6 @@ closeSpan.addEventListener("click", (e) => {
     document.body.classList.remove("noScroll");
 });
 
-// Cerrar al hacer clic fuera del modalContent
 helpModal.addEventListener("mousedown", (e) => {
     if (!modalContent.contains(e.target)) {
         helpModal.style.display = "none";

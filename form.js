@@ -1,9 +1,6 @@
-// Importa las funciones necesarias de Firebase SDK modular
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-// Importa setDoc, doc, getDoc para poder verificar y especificar el ID del documento, y serverTimestamp
 import { getFirestore, collection, doc, setDoc, getDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-// Tu configuración de Firebase (DEBES MANTENER TUS VALORES REALES AQUÍ)
 const firebaseConfig = {
     apiKey: "AIzaSyDpZ1iVlOE07m1vXW71A8rJq6o1-u9zq1g",
     authDomain: "dbcalculadoraint.firebaseapp.com",
@@ -15,7 +12,6 @@ const firebaseConfig = {
     measurementId: "G-9MZYELC460"
 };
 
-// Inicializa Firebase y obtiene la instancia de Firestore
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
@@ -27,7 +23,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
         let isValid = true;
 
-        // Limpiar todos los mensajes de error al inicio de cada intento de envío
         document.querySelectorAll('.error-message').forEach(msg => {
             msg.textContent = '';
             msg.style.display = 'none';
@@ -40,7 +35,6 @@ document.addEventListener('DOMContentLoaded', function () {
             isValid = false;
         }
 
-        // Obtener valores de los campos
         const studentCode = document.getElementById('studentCode').value.trim();
         const tools = document.querySelector('input[name="toolsUsed"]:checked');
         const studyTime = parseInt(document.getElementById('studyTime').value);
@@ -49,7 +43,6 @@ document.addEventListener('DOMContentLoaded', function () {
         const attendance = parseInt(document.getElementById('attendance').value);
         const examType = document.getElementById('examType').value;
 
-        // Validaciones básicas de campos
         if (studentCode === '') {
             showError('studentCodeError', 'Por favor, ingresa el Código del Estudiante.');
         }
@@ -72,7 +65,6 @@ document.addEventListener('DOMContentLoaded', function () {
             showError('examTypeError', 'Por favor, selecciona el tipo de examen.');
         }
         
-        // Si todas las validaciones básicas pasan, intentar guardar los datos
         if (isValid) {
             guardarDatos();
         }
@@ -80,7 +72,6 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 const guardarDatos = async () => {
-    // Obtener los valores de los campos (ya validados por el listener del submit)
     const studentCodeValue = document.getElementById('studentCode').value.trim();
     const herramientaValue = document.querySelector('input[name="toolsUsed"]:checked').value;
     const hrsEstudioValue = parseInt(document.getElementById('studyTime').value);
@@ -90,22 +81,17 @@ const guardarDatos = async () => {
     const examTypeValue = document.getElementById('examType').value;
 
     try {
-        // Construye el ID del documento para este estudiante y tipo de examen
         const documentId = `${studentCodeValue}_${examTypeValue}`;
         const docRef = doc(db, "EncuestaRendimiento", documentId);
 
-        // **Paso de validación clave: Verificar si el documento ya existe**
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
-            // Si el documento ya existe, significa que este examen ya fue enviado por este estudiante.
-            // Mostramos un mensaje de alerta y no guardamos.
             alert(`El estudiante con código ${studentCodeValue} ya ha enviado el ${examTypeValue === 'primer' ? 'Primer Examen' : 'Segundo Examen'}. No se permiten múltiples envíos para el mismo examen.`);
             console.warn(`Intento de re-envío detectado para el código ${studentCodeValue} y examen ${examTypeValue}.`);
-            return; // Detener la función aquí
+            return;
         }
 
-        // Si el documento NO existe, procedemos a guardarlo
         await setDoc(docRef, {
             codigoEstudiante: studentCodeValue,
             asistencia: asistenciaValue,
@@ -114,10 +100,10 @@ const guardarDatos = async () => {
             notaEx: notaExValue,
             herramienta: herramientaValue,
             tipoExamen: examTypeValue,
-            timestamp: serverTimestamp() // Marca de tiempo del servidor para ordenar
+            timestamp: serverTimestamp()
         });
         alert("¡Datos guardados exitosamente!");
-        document.getElementById('studyForm').reset(); // Limpiar el formulario después del envío exitoso
+        document.getElementById('studyForm').reset();
     } catch (error) {
         console.error("Error al guardar el documento: ", error);
         alert("Error al guardar los datos. Por favor, inténtalo de nuevo.");
