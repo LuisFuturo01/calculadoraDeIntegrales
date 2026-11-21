@@ -26,3 +26,11 @@ Thumbs.db
 
 #simulacion de datos
 simulacionDeDatos/
+node_modules/
+.venv/
+.env
+.env.*
+!.env.example
+*credenciales*.json
+credenciales*.txt
+.kilo/

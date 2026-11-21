@@ -13,7 +13,7 @@ def servir_pagina_principal():
 
 @app.route('/<path:ruta>')
 def servir_archivos_estaticos(ruta):
-    return send_from_directory('..', ruta)
+    return send_from_directory('.', ruta)
 
 @app.route('/previsualizar_funcion', methods=['POST'])
 def previsualizar_funcion():
@@ -78,7 +78,9 @@ def calcular_integral():
 
             if integral_definida_valor.is_real == True and integral_definida_valor not in [sp.oo, -sp.oo]:
                 try:
-                    valor_numerico_definida = str(integral_definida_valor.evalf(num_decimales))
+                    # Redondea a N decimales (evalf(n) usa cifras significativas, no decimales)
+                    decimales = max(0, min(int(num_decimales), 15))
+                    valor_numerico_definida = f"{float(integral_definida_valor.evalf(30)):.{decimales}f}"
                 except Exception:
                     valor_numerico_definida = "No numérico / Error al evaluar"
             elif integral_definida_valor in [sp.oo, -sp.oo]:
@@ -103,4 +105,5 @@ def calcular_integral():
         return jsonify({'error': f"Error: {str(e)}. Revisa tu entrada. Ej: 'x**2', 'sin(x)'. Para infinito usa 'inf' o '-inf'."}), 400
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    import os
+    app.run(debug=os.getenv('FLASK_DEBUG') == '1', host='0.0.0.0', port=int(os.getenv('PORT', 5000)))
